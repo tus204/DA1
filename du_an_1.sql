@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: localhost:3306
--- Thời gian đã tạo: Th7 18, 2024 lúc 11:24 PM
+-- Thời gian đã tạo: Th7 18, 2024 lúc 11:30 PM
 -- Phiên bản máy phục vụ: 8.0.30
 -- Phiên bản PHP: 8.2.17
 
@@ -213,26 +213,6 @@ CREATE TABLE `variants` (
   `size_id` int NOT NULL,
   `price` decimal(10,3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Đang đổ dữ liệu cho bảng `variants`
---
-
-INSERT INTO `variants` (`id`, `pro_id`, `size_id`, `price`) VALUES
-(26, 9, 2, 60.000),
-(27, 9, 3, 70.000),
-(28, 10, 1, 50.000),
-(29, 10, 2, 60.000),
-(30, 10, 3, 70.000),
-(31, 11, 1, 50.000),
-(32, 11, 2, 60.000),
-(33, 11, 3, 70.000),
-(34, 12, 1, 50.000),
-(35, 12, 2, 60.000),
-(36, 12, 3, 70.000),
-(37, 13, 1, 50.000),
-(38, 13, 2, 60.000),
-(39, 13, 3, 70.000);
 
 -- --------------------------------------------------------
 
