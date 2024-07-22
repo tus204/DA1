@@ -1,6 +1,7 @@
 <?php
 include '../model/pdo.php';
 include '../model/taikhoan.php';
+include '../config_mail.php';
 
 if (isset($_GET['act']) && ($_GET['act'] != '')) {
     $act = $_GET['act'];

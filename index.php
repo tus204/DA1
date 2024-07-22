@@ -2,6 +2,8 @@
 include ("./user/header.php");
 include ("./model/pdo.php");
 include ("./model/taikhoan.php");
+include 'config_mail.php';
+include ('VerifyEmail.class.php');
 
 
 if (isset($_GET['act']) && ($_GET['act'] != '')) {

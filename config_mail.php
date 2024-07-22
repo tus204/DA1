@@ -4,7 +4,7 @@ use PHPMailer\PHPMailer\Exception;
 
 require 'vendor/autoload.php';
 
-function send_verification_email($email, $verification_link) {
+function send_verification_email($email, $verification_link, $subject) {
     $mail = new PHPMailer(true);
 
     try {
@@ -17,17 +17,21 @@ function send_verification_email($email, $verification_link) {
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port       = 587;
 
-        $mail->setFrom('your_email@example.com', 'no-reply@meomeo.com');
+        $mail->setFrom('no-reply@meomeo.com', 'bo Tus hehe');
 
         $mail->addAddress($email);
 
-        $mail->isHTML(true);
-        $mail->Subject = 'Xác thực email của bạn';
+        $mail->isHTML(true);        
+        $mail->CharSet = 'utf-8';
+        $mail->Subject = $subject;
         $mail->Body    = "Click here to verifycation broo: <a href='$verification_link'>$verification_link</a>";
+        $mail->Body    .= "<br><b>Đường link có hiệu lực trong 5p !!!</b>";
 
         $mail->send();
+        return true;
     } catch (Exception $e) {
-        echo "Không thể gửi email. Lỗi: {$mail->ErrorInfo}";
+        // echo "Không thể gửi email. Lỗi: {$mail->ErrorInfo}";
+        return false;
     }
 }
 ?>
