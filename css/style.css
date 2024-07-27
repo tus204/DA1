@@ -19,13 +19,13 @@ section{
     justify-content: space-around;
     background: #fff;
     position: fixed;
-    right: 0;
+    right: -50px;
     left: 0;
     z-index: 1000;
     box-shadow: 0 0 10px rgba(0,0,0,0.5);
 }
- nav .logo img{
-    width: 200px;
+nav .logo img{
+    width: 100px;
     margin: 5px 20px;
     position: relative;
     left: -45%;
@@ -33,6 +33,8 @@ section{
 }
  nav ul{
     list-style: none;
+    margin-bottom: 5px;
+    margin-right: 20px;
 }
  nav ul>li{
     display: inline-block;
@@ -49,17 +51,32 @@ section{
  nav ul li>a:hover{
     color: #603601;
 }
+
+nav .login {
+    display: flex;
+    align-items: center;
+}
+
+nav .login form button:hover {
+    /* color: #fff; */
+    background: #935203;    
+}
+
+nav .login form button:hover i {
+    color: #fff;
+}
+
  nav .login>a{
     color: #000;
     text-decoration: none;
-    border: 2px solid #603601;
-    border-radius: 20px;
+    /* border: 2px solid #603601;
+    border-radius: 20px; */
     padding: 7px 20px;
     transition: 0.3s;
 }
  nav .login>a:hover{
-    background: #603601;
-    color: #fff;
+    /* background: #603601; */
+    color: #935203;
 }
 
 .user-options>a:hover{
@@ -111,7 +128,7 @@ section .main{
     align-items: center;
     justify-content: space-around;
     position: relative;
-    top: 80px;
+    top: 100px;
 }
 section .main .main_text h1{
     color: #000;
@@ -168,7 +185,7 @@ section .main .main_text .btn:hover::before{
     bottom: 0;
 }
 section .main .main_image img{
-    width: 650px;
+    width: 550px;
     animation: animate 5s linear infinite;
 }
 
@@ -247,45 +264,46 @@ section .main .main_image img{
     color: #603601;
 }
 
-.about .about_main .about_text .about_services .s_1 a{
+.about .about_main .about_text .about_services .s a{
     text-decoration: none;
-    color: #000;
+    color: #603601;
     font-size: 16px;
 }
 
-.about .about_main .about_text .about_btn i{
+.about .about_main .about_text .btn i{
     font-size: 15px;
     margin-right: 8px;
 }
 
-.about .about_main .about_text .about_btn{
-    position: relative;
-    top: 35px;
-    padding: 10px 20px;
-    border: 2px solid #603601;
-    text-decoration: none;
+.about .about_main .about_text .btn{
     color: #000;
-    z-index: 5;
+    text-decoration: none;
+    border: 2px solid #603601;
+    /* padding: 10px 20px; */
+    position: relative;
+    top: 30px;
+    /* left: 5%; */
     transition: 0.3s;
+    z-index: 1;
 }
 
-.about .about_main .about_text .about_btn:hover{
+.about .about_main .about_text .btn:hover{
     color: #fff;
 }
 
-.about .about_main .about_text .about_btn::before{
+.about .about_main .about_text .btn::before{
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     width: 0;
     height: 100%;
-    z-index: -1;
     background: #603601;
+    z-index: -1;
     transition: 0.3s;
 }
 
-.about .about_main .about_text .about_btn:hover::before{
+.about .about_main .about_text .btn:hover::before{
     top: unset;
     width: 100%;
     bottom: 0;
@@ -296,8 +314,8 @@ section .main .main_image img{
 /*Menu*/
 .menu_home{
     width: 100%;
-    height: 100vh;
-    padding: 30px 0;
+    /* margin: auto; */
+    padding: 10px 0 20px 0px;
 }
 
 .menu_home h1{
@@ -314,29 +332,31 @@ section .main .main_image img{
 }
 
 .menu_home .menu_box{
-    width: 95%;
-    margin: 35px auto 0 auto;
-    display: grid;
-    grid-gap: 30px 10px;
-    grid-template-columns: 1fr 1fr 1fr;
+    max-width: 95%;
+    margin: 45px auto;
+    /* display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-gap: 30px 15px; */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
 }
 
 .menu_home .menu_box .menu_card{
-    background-image: url(../img/coffee_bg.png);
+    background-color: #fff4e7;
     background-size: cover;
     background-position: center;
-    margin: 0 auto;
-    width: 450px;
-    height: 575px;
-    text-align: center;
-    cursor: pointer;
+    height: 555px;
+    width: calc(25% - 10px); 
+    text-align: left;
     padding: 20px 0;
     border-radius: 10px;
     box-shadow: 3px 3px 10px rgba(0,0,0,0.2);
 }
 .menu_home .menu_box .menu_card .menu_img{
     margin: 0 auto;
-    width: 420px;
+    width: 95%;
     height: 340px;
     margin-bottom: 15px;
     box-shadow: 0 0 8px rgba(0,0,0,0.7);
@@ -347,32 +367,39 @@ section .main .main_image img{
     object-fit: cover;
     object-position: center;
 }
+/* .menu_home .menu_box .menu_card .menu_text .price{
+    display: flex;
+} */
 .menu_home .menu_box .menu_card .menu_text h2{
     font-size: 30px;
-    margin-bottom: 15px;
+    margin-bottom: 5px;
     margin-top: 25px;
+    margin-left: 15px;
 }
 .menu_home .menu_box .menu_card .menu_text p{
     line-height: 21px;
     margin-bottom: 15px;
-    margin: 0 auto;
+    /* margin: 0 auto; */
+    margin-left: 15px;
     width: 400px;
     font-size: 19px;
+    color: #935203;
 }
-.menu_home .menu_box .menu_card .menu_text .menu_btn{
+.menu_home .menu_box .menu_card .menu_text .btn{
     color: #000;
     text-decoration: none;
-    padding: 10px 20px;
+    /* padding: 10px 20px; */
+    margin-left: 15px;
     border: 2px solid #603601;
     position: relative;
-    top: 20px;
-    z-index: 5;
+    /* top: 20px; */
+    z-index: 1;
     transition: 0.3s;
 }
-.menu_home .menu_box .menu_card .menu_text .menu_btn:hover{
+.menu_home .menu_box .menu_card .menu_text .btn:hover{
     color: #fff;
 }
-.menu_home .menu_box .menu_card .menu_text .menu_btn::before{
+.menu_home .menu_box .menu_card .menu_text .btn::before{
     content: '';
     position: absolute;
     top: 0;
@@ -383,12 +410,12 @@ section .main .main_image img{
     z-index: -1;
     transition: 0.3s;
 }
-.menu_home .menu_box .menu_card .menu_text .menu_btn:hover::before{
+.menu_home .menu_box .menu_card .menu_text .btn:hover::before{
     top: unset;
     bottom: 0;
     width: 100%;
 }
-.menu_home .menu_box .menu_card .menu_text .menu_btn i{
+.menu_home .menu_box .menu_card .menu_text .btn i{
     margin-right: 8px;
 }
 
@@ -1011,8 +1038,21 @@ footer .footer_main .footer_tag i:hover{
     grid-gap: 30px 15px;
 }
 
+.menu h1{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 45px;
+    color: #000;
+}
+
+.menuh1 span{
+    color: #603601;
+    margin-left: 15px;
+}
+
 .menu .menu_box .menu_card{
-    background-image: url(../img/coffee_bg.png);
+    /* background-image: url(../img/coffee_bg.png); */
     background-size: cover;
     background-position: center;
     width: 350px;
@@ -1039,7 +1079,7 @@ footer .footer_main .footer_tag i:hover{
     object-position: center;
 }
 
-.menu .menu_box .menu_card .menu_text h2{
+/* .menu .menu_box .menu_card .menu_text h2{
     font-size: 30px;
     margin: 0px 0px 5px 20px;
 }
@@ -1048,6 +1088,22 @@ footer .footer_main .footer_tag i:hover{
     line-height: 21px;
     margin: 0px 0px 15px 20px;
     width: 310px;
+} */
+
+.menu .menu_box .menu_card .menu_text h2{
+    font-size: 30px;
+    margin-bottom: 5px;
+    margin-top: 25px;
+    margin-left: 15px;
+}
+.menu .menu_box .menu_card .menu_text p{
+    line-height: 21px;
+    margin-bottom: 15px;
+    /* margin: 0 auto; */
+    margin-left: 15px;
+    /* width: 400px; */
+    font-size: 19px;
+    color: #935203;
 }
 
 .menu .menu_box .menu_card .menu_text .price{
@@ -1062,7 +1118,7 @@ footer .footer_main .footer_tag i:hover{
     font-size: 13px;
 } */
 
-.menu .menu_box .menu_card .menu_text .menu_btn{
+/* .menu .menu_box .menu_card .menu_text .menu_btn{
     color: #000;
     text-decoration: none;
     padding: 12px 35px;
@@ -1094,11 +1150,45 @@ footer .footer_main .footer_tag i:hover{
     top: unset;
     width: 100%;
     bottom: 0;
-}
-
+} 
 .menu .menu_box .menu_card .menu_text .menu_btn i{
     margin-right: 8px;
+}*/
+
+.menu .menu_box .menu_card .menu_text .btn{
+    color: #000;
+    text-decoration: none;
+    /* padding: 10px 20px; */
+    margin-left: 15px;
+    border: 2px solid #603601;
+    position: relative;
+    /* top: 20px; */
+    z-index: 1;
+    transition: 0.3s;
 }
+.menu .menu_box .menu_card .menu_text .btn:hover{
+    color: #fff;
+}
+.menu .menu_box .menu_card .menu_text .btn::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background-color: #603601;
+    z-index: -1;
+    transition: 0.3s;
+}
+.menu .menu_box .menu_card .menu_text .btn:hover::before{
+    top: unset;
+    bottom: 0;
+    width: 100%;
+}
+.menu .menu_box .menu_card .menu_text .btn i{
+    margin-right: 8px;
+}
+
 
 
 /* CHO PRODUCT DETAIL */
