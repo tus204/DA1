@@ -59,3 +59,47 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Media and Category Section -->
+                <div class="col-lg-4">
+                    <!-- Media Section -->
+                    <div class="card mb-8 rounded-4">
+                        <div class="card-header p-7 bg-transparent">
+                            <h4 class="fs-18px mb-0 font-weight-500">Media</h4>
+                        </div>
+                        <div class="card-body p-7">
+                            <div class="input-upload">
+                                <?php if ($in4['img']) { ?>
+                                    <div class="mb-7">
+                                        <img src="../assets/images/products/<?=$in4['img']?>" width="102" class="d-block mx-auto" alt>
+                                    </div>
+                                <?php } ?>
+                                <input class="form-control" type="file" name="img">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Category Section -->
+                    <div class="card mb-8 rounded-4">
+                        <div class="card-header p-7 bg-transparent">
+                            <h4 class="fs-18px mb-0 font-weight-500">Category</h4>
+                        </div>
+                        <div class="card-body p-7">
+                            <div class="row mx-n3">
+                                <div class="col-sm-12 mb-6 px-3">
+                                    <label class="mb-4 fs-13px ls-1 fw-bold text-uppercase"
+                                        for="category">Category</label>
+                                    <select class="form-select" id="category" name="cate">
+                                        <?php foreach ($dm as $item) { ?>
+                                            <option value="<?= $item['id'] ?>" <?= $item['id'] == $dmuc['id'] ? 'selected' : '' ?>><?= $item['name'] ?></option>
+                                        <?php } ?>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
