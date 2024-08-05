@@ -35,14 +35,11 @@
                         <li
                             class="nav-item transition-all-xl-1 py-xl-11 py-0 me-xxl-12 me-xl-10 dropdown dropdown-hover">
                             <a class="nav-link d-flex justify-content-between position-relative py-xl-0 px-xl-0 text-uppercase fw-semibold ls-1 fs-15px fs-xl-14px"
-                                href="#" id="menu-item-pages" aria-haspopup="true"
-                                aria-expanded="false">Posts</a>
+                                href="#" id="menu-item-pages" aria-haspopup="true" aria-expanded="false">Posts</a>
                         </li>
-                        <li
-                            class="nav-item transition-all-xl-1 py-xl-11 me-xl-9  dropdown-hover dropdown-fullwidth">
+                        <li class="nav-item transition-all-xl-1 py-xl-11 me-xl-9  dropdown-hover dropdown-fullwidth">
                             <a class="nav-link d-flex flex-nowrap justify-content-center py-xl-0 px-xl-0 text-uppercase fw-semibold ls-1 fs-15px fs-xl-14px"
-                                href="#" id="menu-item-blocks" aria-haspopup=""
-                                aria-expanded="">About us</a>
+                                href="#" id="menu-item-blocks" aria-haspopup="" aria-expanded="">About us</a>
                         </li>
                     </ul>
                 </div>
@@ -55,15 +52,7 @@
                             </svg>
                         </a>
                     </div>
-                    <div class="px-5 d-none d-xl-inline-block">
-                        <a class="lh-1 color-inherit text-decoration-none" href="#" data-bs-toggle="modal"
-                            data-bs-target="#signInModal">
-                            <svg class="icon icon-user-light">
-                                <use xlink:href="#icon-user-light"></use>
-                            </svg>
-                        </a>
-                    </div>
-                    <div class="px-5 d-none d-xl-inline-block">
+                    <!-- <div class="px-5 d-none d-xl-inline-block">
                         <a class="position-relative lh-1 color-inherit text-decoration-none" href="shop/wishlist.html">
                             <svg class="icon icon-star-light">
                                 <use xlink:href="#icon-star-light"></use>
@@ -72,7 +61,7 @@
                                 class="badge bg-dark text-white position-absolute top-0 start-100 translate-middle mt-4 rounded-circle fs-13px p-0 square"
                                 style="--square-size: 18px">3</span>
                         </a>
-                    </div>
+                    </div> -->
                     <div class="px-5 d-none d-xl-inline-block">
                         <a class="position-relative lh-1 color-inherit text-decoration-none" href="#"
                             data-bs-toggle="offcanvas" data-bs-target="#shoppingCart" aria-controls="shoppingCart"
@@ -85,7 +74,49 @@
                                 style="--square-size: 18px">3</span>
                         </a>
                     </div>
-                    <div class="color-modes position-relative ps-5">
+                    <?php if (isset($_SESSION['user'])): ?>
+                        <div class="color-modes position-relative ps-5">
+                            <a class="bd-theme btn btn-link nav-link dropdown-toggle d-inline-flex align-items-center justify-content-center p-0 position-relative"
+                                href="#" aria-expanded="true" data-bs-toggle="dropdown" data-bs-display="static"
+                                aria-label="User menu">
+                                <svg class="icon icon-user-light">
+                                    <use xlink:href="#icon-user-light"></use>
+                                </svg>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end fs-14px" data-bs-popper="static">
+                                <li>
+                                    <a class="dropdown-item d-flex align-items-center" href="index.php?act=">
+                                        Hồ sơ
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item d-flex align-items-center" href="index.php?act=dangxuat">
+                                        Đăng xuất
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    <?php else: ?>
+                        <div class="px-5 d-none d-xl-inline-block pt-1">
+                            <a class="lh-1 color-inherit text-decoration-none" href="index.php?act=dangnhap">
+                                <i class="fa-regular fa-arrow-right-to-bracket fs-4"></i>
+                            </a>
+                        </div>
+                    <?php endif; ?>
+
+                    <!-- <div class="px-5 d-none d-xl-inline-block pt-1">
+                        <a class="lh-1 color-inherit text-decoration-none" href="index.php?act=dangnhap">
+                            <i class="fa-regular fa-arrow-right-to-bracket fs-4"></i>
+                        </a>
+                    </div> -->
+                    <!-- <div class="px-5 d-none d-xl-inline-block">
+                        <a class="lh-1 color-inherit text-decoration-none" href="index.php?act=dangnhap">
+                            <svg class="icon icon-user-light">
+                                <use xlink:href="#icon-user-light"></use>
+                            </svg>
+                        </a>
+                    </div> -->
+                    <!-- <div class="color-modes position-relative ps-5">
                         <a class="bd-theme btn btn-link nav-link dropdown-toggle d-inline-flex align-items-center justify-content-center p-0 position-relative rounded-circle"
                             href="#" aria-expanded="true" data-bs-toggle="dropdown" data-bs-display="static"
                             aria-label="Toggle theme (light)">
@@ -131,7 +162,7 @@
                                 </button>
                             </li>
                         </ul>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>

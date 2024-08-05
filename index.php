@@ -1,17 +1,23 @@
 <?php
+ob_start();
 session_start();
+
 include ("./user/header.php");
 include ("./user/navbar.php");
 include ("./model/pdo.php");
 include ("./model/taikhoan.php");
 include ("./model/sanpham.php");
 include 'config_mail.php';
-
+include 'VerifyEmail.class.php';
 
 if (isset($_GET['act']) && ($_GET['act'] != '')) {
     $act = $_GET['act'];
     switch ($act) {
         case 'dangnhap':
+            if (isset($_SESSION['user'])) {
+                header('location: index.php');
+                exit();
+            }
             if (isset($_POST['submit'])) {
                 $username = $_POST['username'];
                 $password = $_POST['password'];
@@ -36,6 +42,9 @@ if (isset($_GET['act']) && ($_GET['act'] != '')) {
             break;
 
         case 'dangky':
+            if (isset($_SESSION['user'])) {
+                header('location: index.php');
+            }
             if (isset($_POST['submit'])) {
                 $username = $_POST['username'];
                 $email = $_POST['email'];
@@ -122,8 +131,8 @@ if (isset($_GET['act']) && ($_GET['act'] != '')) {
             header('location: admin');
         }
     }
-    $sanphams =  loadall_sanpham();
-    $sanphams_feat =  loadall_sanpham_feat();
+    $sanphams = loadall_sanpham();
+    $sanphams_feat = loadall_sanpham_feat();
     $danhmucs = load_danhmuc();
     include ("./user/home.php");
 }
@@ -131,8 +140,3 @@ if (isset($_GET['act']) && ($_GET['act'] != '')) {
 include ('./user/footer.php');
 
 ?>
-
-
-
-
-
