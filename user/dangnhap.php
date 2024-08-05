@@ -29,7 +29,7 @@
                         id="staySignedIn" checked>
                     <label class="custom-control-label text-body" for="staySignedIn">Stay signed in</label>
                 </div>
-                <a href="index.php?act=forgot_password" class="text-secondary">Forgot your password?</a>
+                <a href="index.php?act=forgot_password" class="text-secondary">Forgxxxot your password?</a>
             </div>
             <button type="submit" value="Login" name="submit"
                 class="btn btn-dark btn-hover-bg-primary btn-hover-border-primary w-100">Log In</button>
