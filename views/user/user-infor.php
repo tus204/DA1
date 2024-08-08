@@ -128,3 +128,29 @@
             </div>
 
         </div>
+        <?php
+    } else {
+    ?>
+        <div class="container-fluid mt-5">
+            <div class="row vh-100 rounded justify-content-center mx-0 pt-5">
+                <div class="col-md-6 text-center"> 
+                    <h4 class="mb-4">Bạn chưa đăng nhập</h4>
+                    <p class="mb-4 text-dark">Mời bạn đăng nhập để sử dụng chức năng</p>
+                    <a class="btn btn-primary rounded-pill py-3 px-5" href="index.php?url=dang-nhap">Đăng nhập ngay</a>
+                    
+                </div>
+            </div>
+        </div>
+    <?php
+    }
+    ?>  
+
+
+</section>
+
+<style> 
+    p{
+        color: #111;
+        font-size: 16px;
+    }
+</style>
