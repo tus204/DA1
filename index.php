@@ -7,8 +7,15 @@ session_start();
 
 require_once "models/pdo_library.php";
 require_once "models/BaseModel.php";
-
+require_once "models/ProductModel.php";
+require_once "models/CategoryModel.php";
 require_once "models/CustomerModel.php";
+require_once "models/CommentModel.php";
+require_once "models/CartModel.php";
+require_once "models/OrderModel.php";
+require_once "models/PostModel.php";
+require_once "admin/models_admin/BannerModel.php";
+require_once "config/VerifyEmail.class.php";
 define('BASE_URL', 'index.php?url=');
 define('URL_MOMO', 'http://localhost/fpoly/DA1-N8/cam-on');
 define('URL_ORDER', 'http://localhost/fpoly/DA1-N8/don-hang');
