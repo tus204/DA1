@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: May 26, 2024 at 08:35 AM
--- Server version: 8.0.30
--- PHP Version: 8.3.3
+-- Máy chủ: localhost:3306
+-- Thời gian đã tạo: Th8 08, 2024 lúc 02:54 AM
+-- Phiên bản máy phục vụ: 8.0.30
+-- Phiên bản PHP: 8.2.17
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,83 +18,80 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `suapass`
+-- Cơ sở dữ liệu: `da1`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `banners`
+-- Cấu trúc bảng cho bảng `banners`
 --
 
 CREATE TABLE `banners` (
   `id` int NOT NULL,
-  `image` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `link` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `image` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `link` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `status` tinyint NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `carts`
+-- Cấu trúc bảng cho bảng `carts`
 --
 
 CREATE TABLE `carts` (
   `cart_id` int NOT NULL,
   `product_id` int NOT NULL,
   `user_id` int NOT NULL,
-  `product_name` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `product_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `product_price` int NOT NULL,
   `product_quantity` int NOT NULL,
-  `product_image` varchar(255) COLLATE utf8mb4_general_ci NOT NULL
+  `product_image` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `carts`
+-- Đang đổ dữ liệu cho bảng `carts`
 --
 
 INSERT INTO `carts` (`cart_id`, `product_id`, `user_id`, `product_name`, `product_price`, `product_quantity`, `product_image`) VALUES
-(80, 25, 9, 'Cây cam ngọt', 160000, 1, 'cay-cam-ngot.jpg'),
-(81, 23, 9, 'Sách đất rừng', 120000, 1, 'dat-rung.jpg'),
-(82, 27, 9, 'Người bà tài giỏi(tái bản 2022)', 180000, 1, 'nguoi-ba.jpg'),
-(83, 2, 9, 'Sách mới', 110000, 3, 'book-2.png'),
-(138, 32, 11, 'Kiếm Tiền Từ Tiktok', 100000, 1, 'kiem-tien-titok.jpg');
+(180, 30, 16, 'Bánh mì nguyên cám mix hạt ADELA BAKERY', 102000, 2, '56547d9660b4591809b51ff3d34b3878.jpg');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `categories`
+-- Cấu trúc bảng cho bảng `categories`
 --
 
 CREATE TABLE `categories` (
   `category_id` int NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `image` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `image` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `status` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `categories`
+-- Đang đổ dữ liệu cho bảng `categories`
 --
 
 INSERT INTO `categories` (`category_id`, `name`, `image`, `status`) VALUES
-(1, 'Chưa có danh mục', 'tieng-anh-nguoi-moi.jpg', 1),
-(2, 'Tâm lý', 'ngon-tinh.jpg', 1),
-(4, 'Tiểu thuyết', 'cay-cam-ngot.jpg', 1),
-(6, 'Văn học', 'lam-ban.jpg', 1),
-(16, 'Xu hướng kinh tế', 'xu-huong-kinh-te.jpg', 1),
-(17, 'Tâm linh - Tôn Giáo', 'tam-linh.jpg', 1);
+(1, 'Chưa có danh mục', 'default-product.jpg', 0),
+(2, 'Bánh Trung Thu', 'moon-cake.jpg', 1),
+(4, 'Bánh Kem', 'banh-kem.jpg', 1),
+(6, 'Bánh Quy', 'banh-quy.jpg', 1),
+(16, 'Bánh Bông Lan', 'banh-bong-lan.jpg', 1),
+(17, 'Bánh Mì', 'Fresh_bakery_promo_2_0.jpg', 1),
+(20, 'Bánh Donut', 'banh-donut.jpg', 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `comments`
+-- Cấu trúc bảng cho bảng `comments`
 --
 
 CREATE TABLE `comments` (
   `comment_id` int NOT NULL,
-  `content` text COLLATE utf8mb4_general_ci NOT NULL,
+  `content` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '0 ẩn 1 hiện',
   `user_id` int NOT NULL,
@@ -102,21 +99,17 @@ CREATE TABLE `comments` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `comments`
+-- Đang đổ dữ liệu cho bảng `comments`
 --
 
 INSERT INTO `comments` (`comment_id`, `content`, `date`, `status`, `user_id`, `product_id`) VALUES
-(1, 'Helllo', '2023-11-25 19:46:51', 1, 6, 26),
-(2, 'Tôi là khoa nè', '2023-11-25 20:06:15', 1, 6, 21),
-(3, 'Admin nè xin chào mn', '2023-11-25 20:48:50', 1, 8, 26),
-(4, 'Hello', '2023-11-26 12:00:44', 1, 6, 27),
-(5, 'Sản phẩm tốt đọc hay nên mua nha mn', '2023-11-29 21:11:44', 1, 6, 27),
-(8, 'Ngày 12/5/2023 Hello every one', '2023-12-05 09:46:35', 1, 6, 28);
+(11, 'được', '2024-08-07 06:30:05', 1, 16, 30),
+(12, 'okela', '2024-08-07 08:22:14', 0, 16, 26);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `orderdetails`
+-- Cấu trúc bảng cho bảng `orderdetails`
 --
 
 CREATE TABLE `orderdetails` (
@@ -128,87 +121,23 @@ CREATE TABLE `orderdetails` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `orderdetails`
+-- Đang đổ dữ liệu cho bảng `orderdetails`
 --
 
 INSERT INTO `orderdetails` (`orderdetails_id`, `order_id`, `product_id`, `quantity`, `price`) VALUES
-(21, 10, 24, 1, 120000),
-(22, 10, 27, 1, 180000),
-(23, 11, 1, 2, 110000),
-(24, 11, 24, 1, 120000),
-(25, 12, 23, 1, 120000),
-(26, 12, 20, 1, 160000),
-(27, 13, 25, 2, 160000),
-(28, 13, 26, 2, 200000),
-(29, 14, 25, 4, 160000),
-(30, 14, 27, 1, 180000),
-(31, 14, 26, 2, 200000),
-(32, 15, 23, 1, 120000),
-(33, 15, 26, 1, 200000),
-(34, 16, 27, 1, 180000),
-(35, 16, 26, 1, 200000),
-(36, 16, 20, 1, 160000),
-(37, 17, 29, 1, 50000),
-(38, 17, 31, 1, 126000),
-(39, 17, 32, 2, 100000),
-(40, 18, 31, 1, 126000),
-(41, 18, 24, 1, 120000),
-(42, 19, 30, 1, 102000),
-(48, 22, 29, 1, 50000),
-(49, 22, 28, 1, 180000),
-(50, 23, 1, 2, 159000),
-(51, 23, 24, 1, 120000),
-(52, 24, 15, 1, 95000),
-(53, 24, 14, 1, 102000),
-(54, 25, 21, 1, 88000),
-(55, 26, 21, 4, 88000),
-(56, 27, 29, 1, 50000),
-(57, 27, 1, 1, 159000),
-(58, 28, 28, 1, 180000),
-(59, 29, 2, 1, 97000),
-(60, 29, 29, 1, 50000),
-(61, 29, 1, 1, 159000),
-(62, 30, 31, 3, 126000),
-(63, 31, 2, 2, 97000),
-(64, 31, 1, 1, 159000),
-(65, 32, 32, 1, 100000),
-(66, 33, 21, 1, 88000),
-(67, 33, 25, 1, 160000),
-(68, 33, 28, 3, 180000),
-(69, 34, 29, 1, 50000),
-(70, 34, 31, 3, 126000),
-(71, 35, 1, 1, 159000),
-(72, 35, 28, 2, 180000),
-(73, 36, 25, 1, 160000),
-(74, 36, 27, 1, 180000),
-(75, 36, 31, 2, 126000),
-(76, 37, 32, 1, 100000),
-(77, 38, 31, 1, 126000),
-(78, 38, 30, 1, 102000),
-(79, 39, 25, 1, 160000),
-(80, 39, 29, 2, 50000),
-(81, 39, 30, 1, 102000),
-(82, 40, 17, 1, 187000),
-(83, 40, 16, 1, 90000),
-(84, 40, 18, 2, 120000),
-(85, 41, 25, 5, 160000),
-(86, 42, 29, 2, 50000),
-(87, 42, 17, 1, 187000),
-(88, 43, 27, 1, 180000),
-(89, 43, 31, 1, 126000),
-(90, 44, 1, 1, 159000),
-(91, 44, 28, 1, 180000),
-(92, 45, 28, 1, 180000),
-(93, 45, 31, 2, 126000),
-(94, 46, 6, 1, 100000),
-(95, 47, 6, 5, 100000),
-(96, 48, 2, 4, 97000),
-(97, 48, 1, 1, 159000);
+(101, 51, 29, 2, 50000),
+(102, 51, 30, 1, 102000),
+(103, 52, 30, 1, 102000),
+(104, 53, 29, 1, 50000),
+(105, 54, 29, 1, 50000),
+(106, 55, 26, 2, 200000),
+(107, 56, 26, 1, 200000),
+(108, 57, 26, 4, 200000);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `orders`
+-- Cấu trúc bảng cho bảng `orders`
 --
 
 CREATE TABLE `orders` (
@@ -216,68 +145,38 @@ CREATE TABLE `orders` (
   `user_id` int NOT NULL,
   `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `total` int NOT NULL,
-  `address` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `phone` varchar(10) COLLATE utf8mb4_general_ci NOT NULL,
-  `note` text COLLATE utf8mb4_general_ci NOT NULL,
+  `address` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `phone` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `note` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `status` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `orders`
+-- Đang đổ dữ liệu cho bảng `orders`
 --
 
 INSERT INTO `orders` (`order_id`, `user_id`, `date`, `total`, `address`, `phone`, `note`, `status`) VALUES
-(10, 6, '2023-11-27 22:13:51', 300000, 'Can tho', '0909135986', '', 2),
-(11, 6, '2023-11-28 09:00:28', 340000, 'Can tho', '0909135986', 'Gói sách kĩ giúp em lần trước mua bị rách', 3),
-(12, 7, '2023-11-28 09:24:42', 280000, 'Kiên Giang', '0336216654', 'Hello my friend', 3),
-(13, 9, '2023-11-28 12:01:11', 720000, 'Cái Răng, Cần Thơ', '0909135969', 'Đóng gói hàng kĩ', 2),
-(14, 6, '2023-11-28 14:00:19', 1220000, 'Can tho', '0909135986', 'hi', 4),
-(15, 6, '2023-11-28 18:22:55', 320000, 'Can tho', '0909135986', 'Chúc 1 ngày vui', 4),
-(16, 6, '2023-11-29 22:07:55', 540000, 'Can tho', '0909135986', 'Mua hang 29/11/2023', 3),
-(17, 10, '2023-12-03 10:12:41', 376000, 'Ninh Kiều, Cần Thơ', '0909135985', 'Gói hàng cẩn thận giao nhanh giúp tôi ', 1),
-(18, 6, '2023-12-04 18:23:31', 246000, 'Cái Răng, Cần Thơ', '0909135329', 'Giao hàng nhanh nha, đang cần gấp', 1),
-(19, 6, '2023-12-04 19:43:58', 102000, 'Quận Đống Đa, Hà Nội', '0909246546', 'Mong là sách đọc hay', 4),
-(22, 11, '2023-12-04 20:28:09', 230000, 'Sóc Trăng', '0336246546', 'Đóng hàng kĩ', 3),
-(23, 11, '2023-12-04 20:29:51', 279000, 'Cần Thơ', '0909006764', 'Hello', 1),
-(24, 11, '2023-12-04 21:49:06', 197000, 'Cần Thơ', '0909006764', '', 1),
-(25, 11, '2023-12-04 21:56:40', 88000, 'Cần Thơ', '0909006764', '', 1),
-(26, 11, '2023-12-04 22:00:39', 352000, 'Cần Thơ', '0909006764', '', 1),
-(27, 10, '2023-12-06 22:10:19', 209000, 'Ninh Kiều, Cần Thơ', '0909135985', '', 2),
-(28, 10, '2023-12-06 22:12:15', 180000, 'Long Hồ, Vĩnh Long', '0909135399', 'Mua hàng cho bạn ở quê', 1),
-(29, 6, '2023-12-07 08:48:32', 306000, 'Ninh Kiều, Cần Thơ', '0909135329', '', 3),
-(30, 6, '2023-12-07 08:50:28', 378000, 'Quận Mỹ Đình, Hà Nội', '0336216546', 'Hello 2023', 2),
-(31, 6, '2023-12-11 17:33:40', 353000, 'Long Biên, Hà Nội', '0336216546', 'Giao hàng nhanh giúp tôi', 1),
-(32, 6, '2023-12-11 19:07:50', 100000, 'Cần Thơ', '0336216546', 'Giao nhanh', 1),
-(33, 11, '2023-12-11 19:13:10', 788000, 'Quận Cầu Giấy Hà Nội', '0336216546', 'Sách hay quóaa', 1),
-(34, 10, '2023-12-11 19:55:09', 428000, 'Quận Cầu Giấy Hà Nội', '0909135329', 'Giao hàng nhanh giúp tôi', 4),
-(35, 10, '2023-12-11 20:01:28', 519000, 'Quận Cầu Giấy Hà Nội', '0336216546', 'Giao hàng nhanh giúp tôi', 2),
-(36, 6, '2023-12-12 10:11:51', 592000, 'Anh Khánh, Ninh Kiều, Cần Thơ', '0336246546', 'Đóng hàng kĩ', 1),
-(37, 6, '2023-12-12 10:25:55', 100000, 'Anh Khánh, Ninh Kiều, Cần Thơ', '0909135985', 'Hello', 4),
-(38, 6, '2023-12-12 10:31:24', 228000, 'Anh Khánh, Ninh Kiều, Cần Thơ', '0909135985', 'Đóng hàng kĩ', 1),
-(39, 7, '2023-12-12 17:38:21', 362000, 'Số 14 Nguyễn Công Trứ, phường Vĩnh Thanh, thành phố Rạch Giá, tỉnh Kiên Giang', '0336216123', 'Sách hay', 2),
-(40, 6, '2023-12-12 17:47:50', 517000, 'Số 14 Nguyễn Công Trứ, phường Vĩnh Thanh, thành phố Rạch Giá, tỉnh Kiên Giang', '0909135329', 'Đóng gói hàng kĩ', 1),
-(41, 8, '2023-12-12 17:53:39', 800000, 'Anh Khánh, Ninh Kiều, Cần Thơ', '0336246546', 'Gói hàng kĩ', 1),
-(42, 6, '2023-12-12 18:19:03', 287000, 'Quận Cầu Giấy Hà Nội', '0909135329', 'Mua hàng nè hihi', 2),
-(43, 10, '2023-12-12 18:22:50', 306000, 'Cái Răng, Cần Thơ', '0336246546', 'Gói hàng kĩ', 1),
-(44, 10, '2023-12-12 18:32:55', 339000, 'Số 14 Nguyễn Công Trứ, phường Vĩnh Thanh, thành phố Rạch Giá, tỉnh Kiên Giang', '0909135329', 'Giao hàng nhanh nha', 1),
-(45, 6, '2023-12-13 15:12:18', 432000, 'Số 14 thành phố Rạch Giá, tỉnh Kiên Giang', '0336216546', 'Test mua hàng 13/12/2023', 1),
-(46, 10, '2023-12-13 16:54:29', 100000, 'Ninh Kiều, Cần Thơ', '0909135985', 'Hảo mua hàng nè', 1),
-(47, 10, '2023-12-13 17:01:33', 500000, 'Ninh Kiều, Cần Thơ', '0909135985', '', 1),
-(48, 7, '2023-12-13 17:07:00', 547000, 'Kiên Giang', '0336216654', '', 1);
+(51, 16, '2024-08-07 06:08:28', 202000, 'Mỹ Đình, HN', '0974566306', 'giao cẩn thận nhé', 4),
+(52, 16, '2024-08-07 06:33:47', 102000, 'Ha Noi', '0987654312', '', 1),
+(53, 16, '2024-08-07 06:43:26', 50000, 'Ha Noi', '0987654312', '', 1),
+(54, 16, '2024-08-07 06:55:38', 50000, 'Mỹ Đình, HN', '0974566306', '', 1),
+(55, 16, '2024-08-07 08:24:08', 400000, 'Mỹ Đình, HN', '0974566306', '', 1),
+(56, 16, '2024-08-07 08:29:14', 200000, 'Mỹ Đình, HN', '0974566306', '', 3),
+(57, 16, '2024-08-07 08:30:47', 800000, 'Mỹ Đình, HN', '0974566306', '', 4);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `posts`
+-- Cấu trúc bảng cho bảng `posts`
 --
 
 CREATE TABLE `posts` (
   `post_id` int NOT NULL,
   `category_id` int NOT NULL,
-  `title` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `image` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `author` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `content` text COLLATE utf8mb4_general_ci NOT NULL,
+  `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `image` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `author` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `content` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `views` int NOT NULL DEFAULT '0',
   `status` tinyint(1) NOT NULL DEFAULT '1',
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -285,58 +184,58 @@ CREATE TABLE `posts` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `posts`
+-- Đang đổ dữ liệu cho bảng `posts`
 --
 
 INSERT INTO `posts` (`post_id`, `category_id`, `title`, `image`, `author`, `content`, `views`, `status`, `created_at`, `updated_at`) VALUES
-(1, 9, 'Top 5+ những cuốn sách hay nên đọc 1 lần trong đời', 'top-sach.jpg', 'Admin', '<p><strong>Ngày nay, bạn có thể tìm thấy hàng triệu cuốn sách trên thế giới thuộc vô số chủ đề độc đáo. Tuy nhiên, có những cuốn sách tâm đắc nhất mà bạn không thể bỏ lỡ và nhất định nên đọc một lần. Hãy cùng Sforum điểm qua top 22+ những cuốn sách hay 2023 nên đọc trong đời ngay bây giờ nhé. Đừng quên chọn cho mình cuốn sách ưng ý nhất để đem về tủ sách nhà mình!</strong></p><h4><strong>Nhà giả kim</strong></h4><p>“Nhà giả kim” là một trong những cuốn sách hay của tác giả Paulo Coelho, kể về cuộc hành trình theo đuổi giấc mơ của Santiago, một chàng chăn cừu người Tây Ban Nha. Cuốn sách truyền đạt thông điệp về việc tìm kiếm quy luật của vũ trụ và ý nghĩa thực sự của cuộc đời. Và đây không chỉ là một câu chuyện phiêu lưu mà còn là một hành trình tìm kiếm bản thân, khám phá niềm tin và theo đuổi đam mê.</p><h4><strong>Đắc nhân tâm</strong></h4><p>“Đắc nhân tâm” do Dale Carnegie viết là một trong những cuốn sách hay bán chạy nhất mọi thời đại. Cuốn sách này chứa đựng những bài học về kỹ năng giao tiếp, làm thế nào để thu hút và ảnh hưởng đến người khác. Không chỉ dừng lại ở việc truyền đạt những kỹ năng mềm, cuốn sách còn giúp người đọc hiểu rõ hơn về tâm lý con người và cách xây dựng mối quan hệ.</p><h4><strong>Cà phê cùng Tony</strong></h4><p>“Cà phê cùng Tony” là sách hay nên đọc cho giới trẻ của tác giả Tony Buổi Sáng chứa đựng những suy nghĩ, bài học về cuộc sống, công việc và tình yêu dưới góc nhìn của Tony - một người trẻ tuổi đầy nhiệt huyết. Thông qua những câu chuyện ngắn gọn, dễ hiểu, Tony giúp người đọc nhìn lại và định hình lại quan điểm về nhiều vấn đề trong cuộc sống. Cuốn sách còn một người bạn đồng hành, giúp bạn tìm thấy niềm vui, hạnh phúc và ý nghĩa trong từng khoảnh khắc của cuộc đời.</p><h4><strong>Người giàu có nhất thành Babylon</strong></h4><p>George S. Clason thông qua “Người giàu có nhất thành Babylon” đã trình bày những bài học tài chính quý báu dưới dạng các câu chuyện huyền bí từ Babylon cổ đại, nơi được coi là nền kinh tế phồn thịnh nhất từng tồn tại. Đây là cuốn sách hay 2023 cực kỳ hot mà nhắc tới chắc hẳn ai cũng từng nghe qua một lần.</p><p>Cuốn sách cung cấp cho người đọc những nguyên tắc quản lý tài chính cá nhân, tiết kiệm và đầu tư một cách thông minh. Mỗi chương đều mang đến một bài học riêng biệt, giúp người đọc hiểu biết về việc làm giàu không chỉ dựa vào thu nhập, mà còn cần sự khôn ngoan, kỷ luật và hiểu biết về tiền bạc.</p><h4><strong>Cách nghĩ để thành công (Think &amp; Grow Rich)</strong></h4><p>“Think &amp; Grow Rich” thuộc top những cuốn sách hay nên đọc và là một tác phẩm kinh điển của Napoleon Hill, được viết dựa trên nghiên cứu của ông về hàng trăm người thành đạt nhất thế kỷ 20. Cuốn sách không chỉ giới thiệu về việc kiếm tiền mà còn về việc xây dựng tư duy thành công. Hill trình bày 13 bước để đạt đến sự giàu có và thành công, bắt đầu từ ý thức định hướng, lòng tin và sức mạnh của việc tạo lập mục tiêu cụ thể.</p>', 0, 1, '2023-11-29 17:13:09', '2023-12-04 21:31:51'),
-(5, 2, 'Những tác giả có sức ảnh hưởng nhất trong làng sách Việt Nam năm 2015', 'tac-gia.jpg', 'Admin', '<p><strong>Năm 2015, bên cạnh những tác giả đã quá đỗi quen thuộc thì thị trường xuất bản còn đón nhận nhiều gương mặt trẻ. Họ đã thổi một làn gió mới tới những người yêu sách, đem đến tinh thần mua sách và đọc sách ở thế hệ 9x, 10x.&nbsp;</strong></p><p>Cùng LĐTĐ điểm tên 10 nhà văn, tác giả tạo được tiếng vang nhất trong làng sách Việt Nam trong năm qua.</p><h4><strong>Nguyễn Nhật Ánh</strong></h4><p>Năm 2015 có thể coi là một năm “đại thắng” đối với nhà văn Nguyễn Nhật Anh. “Tôi thấy hoa vàng trên cỏ xanh” thu nhận thành công trên mức tưởng tượng khi được chuyển thể thành phim nhựa giới thiệu tới khán giả trong và ngoài nước. Bên cạnh sự phủ sóng mạnh mẽ của “Tôi thấy hoa vàng trên cỏ xanh”, những cuốn sách khác của nhà văn Nguyễn Nhật Ánh như: “Bảy bước tới mùa hè”, “Cô gái đến từ hôm qua”… cũng nhanh chóng trở thành “best-seller” ngay từ khi mới ra mắt.</p><p>Thành công của những tác phẩm do Nguyễn Nhật Ánh sáng tác đến từ sự dung dị, đời thường, gắn liền với những kỷ niệm tươi đẹp của tuổi thơ. Mỗi cuốn sách như một bức tranh mở ra trước mắt người đọc những khung cảnh chân phương, đầy ắp tiếng cười.</p><h4><strong>Nguyễn Phong Việt</strong></h4><p>“Đi qua thương nhớ”, “Sinh ra là để cô đơn” hay mới đây nhất là “Sống một cuộc đời bình thường” đều là những cuốn sách được yêu mến của Nguyễn Phong Việt.</p><p>Được mệnh danh là nhà thơ “ăn khách” nhất, Nguyễn Phong Việt chia sẻ: “Tôi may mắn khi mình có rất nhiều cảm xúc. Ngay từ tập thơ đầu, tôi là người làm thơ không câu nệ câu chữ. Mình nghĩ câu đó cần 20 từ thì viết 20 từ chứ không phải vì để cho ngắn gọn, cho người đọc dễ chịu thì viết ngắn hơn. Mình viết mình cảm nhận được trước đã, rồi độc giả mới hiểu. Sau này, tôi có sự thỏa hiệp nho nhỏ, thay đổi vài từ để cảm xúc của câu chữ không bị bóp nghẹt trong đau đớn”.</p><h4><strong>Anh Khang</strong></h4><p>Sớm định hình phong cách riêng trong dòng văn học trẻ sôi động, Anh Khang - tác giả sinh năm 1987 được độc giả trẻ đón nhận qua những tựa sách “hot” như “Ngày trôi về phía cũ”, “Đường hai ngả người thương thành lạ” hay “Buồn làm sao buông”.</p><p>Văn của Anh Khang không tìm đến sự nổi loạn hay phá cách trong con chữ mà tạo ra dấu ấn riêng nhờ sự nhạy cảm trong lối suy nghĩ thấu đáo, truyền tải đúng tâm tình của người trẻ hiện đại. Anh Khang là một trong những tác giả trẻ sở hữu số lượng fans đông đảo nhất hiện nay trên mạng xã hội cũng như ngoài đời thực.</p>', 0, 1, '2023-11-29 17:25:47', '2023-12-03 13:21:05'),
-(8, 9, 'Top cuốn sách tâm lý làm chủ chính mình hay nhất hiện nay', 'top-sach-tam-li.jpg', 'Admin', '<p><i>Tâm lý học là một ngành học thú vị và hấp dẫn, bởi vì nó giúp chúng ta hiểu được tâm lý con người, một thứ rất phức tạp và biến đổi. Nhiều người muốn nâng cao kiến thức về tâm lý học và tìm đọc những cuốn sách chất lượng và hữu ích về ngành học này. Trong bài viết này, sẽ giới thiệu cho bạn top cuốn sách tâm lý nổi tiếng hiện nay.</i></p><h4><strong>Tư duy nhanh và chậm – Daniel Kahneman</strong></h4><p>Tư Duy Nhanh Và Chậm là một cuốn sách nổi tiếng của Daniel Kahneman, một nhà tâm lý học xuất sắc. Sách giải thích rằng tâm trí con người có hai hệ thống hoạt động khác nhau: Hệ thống 1 hoạt động nhanh chóng, trực giác và không cần suy nghĩ nhiều; Hệ thống 2 hoạt động chậm rãi, cẩn thận và cần nhiều sự chú ý. Tác giả cũng cho thấy rằng con người thường mắc phải những sai lầm trong việc ra quyết định, do bị ảnh hưởng bởi những cảm xúc, định kiến và thiếu nhất quán. Cuốn sách này sẽ giúp bạn đọc hiểu được nhiều điều thú vị và sâu sắc về tâm lý con người và nhận ra rằng “Chúng ta không giỏi như chúng ta nghĩ”.</p><h4><a href=\"https://tiki.vn/search?q=phi%20l%C3%BD%20tr%C3%AD\"><strong>Phi lý trí</strong></a><strong> – Dan Ariely</strong></h4><p>Phi Lý Trí là một tác phẩm trong top cuốn sách tâm lý của Dan Ariely, một giáo sư tâm lý học và kinh tế học hành vi, trong đó ông đã trình bày những nghiên cứu và thí nghiệm của mình về sự thiếu hợp lý của con người trong việc ra quyết định và tiết lộ những hiện tượng tâm lý mới lạ và thú vị. Ông đã khẳng định rằng: chúng ta thường bị ảnh hưởng bởi một “hệ thống” phi lý trí vô hình.&nbsp;</p><p>Ông đã kết hợp những nghiên cứu khoa học với những ví dụ thực tế để giúp chúng ta nhận ra những “điểm mù” trong cách suy nghĩ hàng ngày. Phi Lý Trí của Dan Ariely là một cuốn sách tâm lý học rất cuốn hút bởi ông đã sử dụng ngôn ngữ dễ hiểu nhưng vẫn khiến người đọc phải suy ngẫm về những hành vi và những sai lầm của bản thân để có thể sống một cách hợp lý và tốt đẹp hơn.</p><h4><strong>Im lặng – Sức mạnh của người hướng nội</strong></h4><p>Trong cuốn sách này, Susan Cain đã nói về sự khác biệt giữa người hướng ngoại và người hướng nội, và những ưu điểm của người có tính cách nhạy cảm. Tác giả đã chỉ ra rằng người hướng nội có thể tận dụng tính cách của mình để chọn lựa công việc, lĩnh vực phù hợp với mình trong xã hội.&nbsp;</p><p>Cuốn sách này sẽ rất hữu ích cho bạn nếu bạn là người hướng nội muốn tìm đường đi cho bản thân, hoặc nếu bạn muốn hiểu thêm về người hướng nội để có thể quản lý, giao tiếp và hợp tác tốt hơn với họ.</p><h4><strong>Tâm Lý Học Đám Đông – Gustave Le Bon</strong></h4><p>Tác giả Gustave Le Bon, một nhà tâm lý học Pháp nổi tiếng, đã viết cuốn sách Tâm lý học đám đông để nghiên cứu về sự ảnh hưởng của đám đông đến lý trí và cảm xúc của con người. Tác giả đã dựa trên nhiều nghiên cứu về tinh thần và tính cách của các dân tộc, chủng tộc khác nhau trên thế giới. Tác giả đã cho rằng, con người bị chi phối bởi những yếu tố sinh học và tâm lý học. Chủng tộc là một thực thể ẩn sâu trong mỗi cá nhân và có ảnh hưởng đến mọi hành động, ham muốn, xung năng của họ. Tác giả cũng đã trải qua nhiều biến động lịch sử của Pháp, như Công Xã Paris, cách mạng Pháp 1789 và 1848. Những trải nghiệm này đã giúp tác giả có những quan sát và phân tích từ thực tiễn được thể hiện rõ nét trong cuốn sách Tâm lý học đám đông.</p>', 0, 1, '2023-12-03 13:45:32', '2023-12-03 13:45:32'),
-(9, 9, '9 cuốn sách kinh tế hay nhất | Muốn kinh doanh phải đọc qua', 'top-9-sach.jpg', 'Admin', '<p><strong>Bạn quan tâm đến tình hình kinh tế thế giới, bạn muốn bắt đầu một sự nghiệp kinh doanh mà phân vân không biết nền kinh tế thực sự vận hành như thế nào, bạn muốn tìm hiểu một tựa sách về kinh tế nhưng vẫn đang phân vân. Bài viết này sẽ giải đáp hết thắc mắc đó. Cùng tìm hiểu những cuốn sách về kinh doanh hay nhất được chúng tớ tổng hợp nhé.</strong></p><h4><strong>Thế giới phẳng – Thomas L.Friedman</strong></h4><p>Sách kinh tế Thế giới phẳng nói về vấn đề toàn cầu hóa dưới góc độ phân tích độc đáo. Theo tác giả, “phẳng” trong thế giới phẳng đó là sự kết nối, phá vỡ đi rào cản về chính trị, tôn giáo, địa lý, từ đó mở ra địa chính trị, địa kinh tế, phương thức sản xuất kinh doanh tiên tiến hiện đại hơn.</p><p>Cuốn sách tập trung mổ xẻ cấu trúc của nền kinh tế và chính trị đương đại, nêu rõ sự phát triển vượt bậc của khoa học kỹ thuật làm thay đổi diện mạo của nền kinh tế thế giới. Bằng cách trình bày hóm hỉnh hài hước, tác giả đã giúp người đọc hiểu thế giới phẳng được bắt đầu khi nào, diễn tiến ra sao, các yếu tố then chốt làm thế giới phẳng. Thông qua cuốn sách, các doanh nghiệp, quốc gia, cá nhân nhìn nhận rõ được cơ hội và thách thức trong bối cảnh toàn cầu hóa, từ đó đưa ra định hướng phát triển riêng cho mình.</p><h4><strong>Lược sử kinh tế học – Niall Kishtainy</strong></h4><p>Sách kinh tế Lược sử kinh tế học luôn nằm trong top những cuốn sách bán chạy nhất hiện nay. Đọc xong cuốn sách mọi người sẽ cảm nhận được kinh tế học không phải là những kiến thức cao siêu dành cho các doanh nhân, chính khách hay nhà kinh tế học mà nó có ích và gần gũi với cuộc sống củ mỗi người. Mỗi người trong thời đại hiện nay đều cần nắm được các kiến thức cơ bản về kinh tế để giúp cuộc sống của mình được tốt đẹp hơn.</p><p>Nội dung sách tập trung nói về các học thuyết và quy luật kinh tế kinh điển ở phương tây trong hàng nghìn năm qua dưới góc độ khác quan. Tác giả đưa ra những minh họa, ví dụ sống động và dễ hiểu để có thể tiếp cận được phần đa người đọc. Với độ dày khoảng 300 trang, sách kinh tế hay Lược sử kinh tế học giúp chúng ta nắm được các cột mốc quan trọng toàn cảnh nền kinh tế, từ lúc khởi nguồn đơn giản đến khi phức tạp hơn, xuất hiện giá trị thặng dư, buôn bán…</p><h4><strong>Doanh nghiệp của thế kỷ 21 – Robert T. Kiyosaki</strong></h4><p>Nhắc đến những cuốn sách kinh tế hay thì không thể nào kể thiếu tên cuốn Doanh nghiệp của thế kỷ 21. Cuốn sách này sẽ nêu rõ lý do tại sao cần phải xây dựng được cho mình doanh nghiệp riêng, và nên hoạt động trong lĩnh vực nào là tốt nhất. Bên cạnh đó tác giả cũng đưa ra nhiều kiến thức về tư duy làm giàu, cách tìm kiếm các phương tiện giúp xây dựng hình ảnh doanh nghiệp tốt hơn đối với khách hàng, người tiêu dùng, đối tác… Những công cụ, cách thức tìm kiếm mọi thứ để giúp doanh nghiệp phát triển toàn diện hơn cũng được bật mí chi tiết và đầy đủ nhất qua cuốn sách.</p><p>Cuốn sách khai sáng tư duy cho những ai đang mong muốn tự lập kinh doanh và làm giàu cho bản thân. Tác giả đưa ra giải pháp mà bất cứ ai cũng có thể vận dụng, áp dụng thành công mà không cần phải có tài năng hay thiên bẩm.</p><h4><strong>Tuần làm việc 4 giờ – Timothy Ferress</strong></h4><p>Một trong những cuốn sách kinh tế hay mà bạn nên đọc đó là Tuần làm việc 4 giờ. Đọc cuốn sách này, mỗi người sẽ tự trả lời được cho mình câu hỏi làm thế nào để có được cuộc sống tự do, thoải mái như một triệu phú, tỷ phú mà không cần phải có 1 triệu đô la, 1 tỷ đô la – số tiền mà ít ai có được trong suốt cuộc đời học tập, làm việc của mình. Tác giả đã giúp mỗi người biết cách tách biệt thu nhập với thời gian, từ đó xây dựng cho mình lối sống lý tưởng với nhiều hoạt động đa dạng như đi vòng quanh thế giới, đọc sách…</p><p>Từ cuốn sách, tác giả Timothy Ferress cũng đã có những chia sẻ về cách kiếm tiền 40 nghìn đô /tháng chỉ bằng cách làm 4 tiếng/tuần. Sự khác biệt của cuốn sách là đưa ra góc nhìn cuộc sống đơn giản và dễ thở hơn, thay vì đề cập đến các vấn đề thường gặp như thiếu thời gian làm việc, nghỉ ngơi, tinh thần căng thẳng… Nhìn chung mỗi người hoàn toàn có thể sống tốt với công việc mà mình có tiềm năng, quan trọng bạn cần phải khai phá tiềm năng của mình đúng đắn.</p><h4><strong>Chiến lược đại dương xanh – W. Chan Kim &amp; Renee Mauborgne</strong></h4><p>Chiến lược đại dương xanh là cuốn sách hay về kinh tế tiếp theo mà chúng tôi muốn giới thiệu đến các bạn đọc. Cuốn sách này xuất bản từ năm 2004, đến nay đã trải qua gần 20 năm nhưng vẫn giữ nguyên tính lịch sử và sự phù hợp với thời đại. Cuốn sách nổi tiếng này đã được dịch hơn 46 thứ tiếng và bán hơn 4 triệu bản trên toàn thế giới.</p><p>Nội dung cuốn sách đề cập đến chiến lược kinh doanh kinh điển mà các doanh nhân, lãnh đạo cần biết, đó là mở rộng và phát triển thị trường mới – một đại dương xanh – ở đó không có bất cứ sự cạnh tranh nào.</p><p>Chiến lược này nhấn mạnh tầm quan trọng của việc nâng cao giá trị dịch vụ cũng như sản phẩm, đi kèm với đó là giá thành hợp lý để mang lại nhiều quyền lợi cho người tiêu dùng. Chiến lược này có thể đưa các doanh nghiệp phát triển nhảy vọt và tăng trưởng mạnh mẽ về giá trị.</p>', 0, 1, '2023-12-03 17:41:06', '2023-12-03 17:44:51');
+(1, 9, 'Top 5+ món bánh ngon nên thử trong đời', 'top-sach.jpg', 'Admin', '<p><strong>Ngày nay, bạn có thể tìm thấy hàng triệu cuốn sách trên thế giới thuộc vô số chủ đề độc đáo. Tuy nhiên, có những cuốn sách tâm đắc nhất mà bạn không thể bỏ lỡ và nhất định nên đọc một lần. Hãy cùng Sforum điểm qua top 22+ những cuốn sách hay 2023 nên đọc trong đời ngay bây giờ nhé. Đừng quên chọn cho mình cuốn sách ưng ý nhất để đem về tủ sách nhà mình!</strong></p><h4><strong>Nhà giả kim</strong></h4><p>“Nhà giả kim” là một trong những cuốn sách hay của tác giả Paulo Coelho, kể về cuộc hành trình theo đuổi giấc mơ của Santiago, một chàng chăn cừu người Tây Ban Nha. Cuốn sách truyền đạt thông điệp về việc tìm kiếm quy luật của vũ trụ và ý nghĩa thực sự của cuộc đời. Và đây không chỉ là một câu chuyện phiêu lưu mà còn là một hành trình tìm kiếm bản thân, khám phá niềm tin và theo đuổi đam mê.</p><h4><strong>Đắc nhân tâm</strong></h4><p>“Đắc nhân tâm” do Dale Carnegie viết là một trong những cuốn sách hay bán chạy nhất mọi thời đại. Cuốn sách này chứa đựng những bài học về kỹ năng giao tiếp, làm thế nào để thu hút và ảnh hưởng đến người khác. Không chỉ dừng lại ở việc truyền đạt những kỹ năng mềm, cuốn sách còn giúp người đọc hiểu rõ hơn về tâm lý con người và cách xây dựng mối quan hệ.</p><h4><strong>Cà phê cùng Tony</strong></h4><p>“Cà phê cùng Tony” là sách hay nên đọc cho giới trẻ của tác giả Tony Buổi Sáng chứa đựng những suy nghĩ, bài học về cuộc sống, công việc và tình yêu dưới góc nhìn của Tony - một người trẻ tuổi đầy nhiệt huyết. Thông qua những câu chuyện ngắn gọn, dễ hiểu, Tony giúp người đọc nhìn lại và định hình lại quan điểm về nhiều vấn đề trong cuộc sống. Cuốn sách còn một người bạn đồng hành, giúp bạn tìm thấy niềm vui, hạnh phúc và ý nghĩa trong từng khoảnh khắc của cuộc đời.</p><h4><strong>Người giàu có nhất thành Babylon</strong></h4><p>George S. Clason thông qua “Người giàu có nhất thành Babylon” đã trình bày những bài học tài chính quý báu dưới dạng các câu chuyện huyền bí từ Babylon cổ đại, nơi được coi là nền kinh tế phồn thịnh nhất từng tồn tại. Đây là cuốn sách hay 2023 cực kỳ hot mà nhắc tới chắc hẳn ai cũng từng nghe qua một lần.</p><p>Cuốn sách cung cấp cho người đọc những nguyên tắc quản lý tài chính cá nhân, tiết kiệm và đầu tư một cách thông minh. Mỗi chương đều mang đến một bài học riêng biệt, giúp người đọc hiểu biết về việc làm giàu không chỉ dựa vào thu nhập, mà còn cần sự khôn ngoan, kỷ luật và hiểu biết về tiền bạc.</p><h4><strong>Cách nghĩ để thành công (Think &amp; Grow Rich)</strong></h4><p>“Think &amp; Grow Rich” thuộc top những cuốn sách hay nên đọc và là một tác phẩm kinh điển của Napoleon Hill, được viết dựa trên nghiên cứu của ông về hàng trăm người thành đạt nhất thế kỷ 20. Cuốn sách không chỉ giới thiệu về việc kiếm tiền mà còn về việc xây dựng tư duy thành công. Hill trình bày 13 bước để đạt đến sự giàu có và thành công, bắt đầu từ ý thức định hướng, lòng tin và sức mạnh của việc tạo lập mục tiêu cụ thể.</p>', 0, 1, '2023-11-29 17:13:09', '2024-08-07 09:44:07'),
+(5, 2, 'Những nhà sản xuất bánh có sức ảnh hưởng nhất hiện nay', 'tac-gia.jpg', 'Admin', '<p><strong>Năm 2015, bên cạnh những tác giả đã quá đỗi quen thuộc thì thị trường xuất bản còn đón nhận nhiều gương mặt trẻ. Họ đã thổi một làn gió mới tới những người yêu sách, đem đến tinh thần mua sách và đọc sách ở thế hệ 9x, 10x.&nbsp;</strong></p><p>Cùng LĐTĐ điểm tên 10 nhà văn, tác giả tạo được tiếng vang nhất trong làng sách Việt Nam trong năm qua.</p><h4><strong>Nguyễn Nhật Ánh</strong></h4><p>Năm 2015 có thể coi là một năm “đại thắng” đối với nhà văn Nguyễn Nhật Anh. “Tôi thấy hoa vàng trên cỏ xanh” thu nhận thành công trên mức tưởng tượng khi được chuyển thể thành phim nhựa giới thiệu tới khán giả trong và ngoài nước. Bên cạnh sự phủ sóng mạnh mẽ của “Tôi thấy hoa vàng trên cỏ xanh”, những cuốn sách khác của nhà văn Nguyễn Nhật Ánh như: “Bảy bước tới mùa hè”, “Cô gái đến từ hôm qua”… cũng nhanh chóng trở thành “best-seller” ngay từ khi mới ra mắt.</p><p>Thành công của những tác phẩm do Nguyễn Nhật Ánh sáng tác đến từ sự dung dị, đời thường, gắn liền với những kỷ niệm tươi đẹp của tuổi thơ. Mỗi cuốn sách như một bức tranh mở ra trước mắt người đọc những khung cảnh chân phương, đầy ắp tiếng cười.</p><h4><strong>Nguyễn Phong Việt</strong></h4><p>“Đi qua thương nhớ”, “Sinh ra là để cô đơn” hay mới đây nhất là “Sống một cuộc đời bình thường” đều là những cuốn sách được yêu mến của Nguyễn Phong Việt.</p><p>Được mệnh danh là nhà thơ “ăn khách” nhất, Nguyễn Phong Việt chia sẻ: “Tôi may mắn khi mình có rất nhiều cảm xúc. Ngay từ tập thơ đầu, tôi là người làm thơ không câu nệ câu chữ. Mình nghĩ câu đó cần 20 từ thì viết 20 từ chứ không phải vì để cho ngắn gọn, cho người đọc dễ chịu thì viết ngắn hơn. Mình viết mình cảm nhận được trước đã, rồi độc giả mới hiểu. Sau này, tôi có sự thỏa hiệp nho nhỏ, thay đổi vài từ để cảm xúc của câu chữ không bị bóp nghẹt trong đau đớn”.</p><h4><strong>Anh Khang</strong></h4><p>Sớm định hình phong cách riêng trong dòng văn học trẻ sôi động, Anh Khang - tác giả sinh năm 1987 được độc giả trẻ đón nhận qua những tựa sách “hot” như “Ngày trôi về phía cũ”, “Đường hai ngả người thương thành lạ” hay “Buồn làm sao buông”.</p><p>Văn của Anh Khang không tìm đến sự nổi loạn hay phá cách trong con chữ mà tạo ra dấu ấn riêng nhờ sự nhạy cảm trong lối suy nghĩ thấu đáo, truyền tải đúng tâm tình của người trẻ hiện đại. Anh Khang là một trong những tác giả trẻ sở hữu số lượng fans đông đảo nhất hiện nay trên mạng xã hội cũng như ngoài đời thực.</p>', 0, 1, '2023-11-29 17:25:47', '2024-08-07 09:44:31'),
+(8, 9, 'Top bánh kem 2024', 'top-sach-tam-li.jpg', 'Admin', '<p><i>Tâm lý học là một ngành học thú vị và hấp dẫn, bởi vì nó giúp chúng ta hiểu được tâm lý con người, một thứ rất phức tạp và biến đổi. Nhiều người muốn nâng cao kiến thức về tâm lý học và tìm đọc những cuốn sách chất lượng và hữu ích về ngành học này. Trong bài viết này, sẽ giới thiệu cho bạn top cuốn sách tâm lý nổi tiếng hiện nay.</i></p><h4><strong>Tư duy nhanh và chậm – Daniel Kahneman</strong></h4><p>Tư Duy Nhanh Và Chậm là một cuốn sách nổi tiếng của Daniel Kahneman, một nhà tâm lý học xuất sắc. Sách giải thích rằng tâm trí con người có hai hệ thống hoạt động khác nhau: Hệ thống 1 hoạt động nhanh chóng, trực giác và không cần suy nghĩ nhiều; Hệ thống 2 hoạt động chậm rãi, cẩn thận và cần nhiều sự chú ý. Tác giả cũng cho thấy rằng con người thường mắc phải những sai lầm trong việc ra quyết định, do bị ảnh hưởng bởi những cảm xúc, định kiến và thiếu nhất quán. Cuốn sách này sẽ giúp bạn đọc hiểu được nhiều điều thú vị và sâu sắc về tâm lý con người và nhận ra rằng “Chúng ta không giỏi như chúng ta nghĩ”.</p><h4><a href=\"https://tiki.vn/search?q=phi%20l%C3%BD%20tr%C3%AD\"><strong>Phi lý trí</strong></a><strong> – Dan Ariely</strong></h4><p>Phi Lý Trí là một tác phẩm trong top cuốn sách tâm lý của Dan Ariely, một giáo sư tâm lý học và kinh tế học hành vi, trong đó ông đã trình bày những nghiên cứu và thí nghiệm của mình về sự thiếu hợp lý của con người trong việc ra quyết định và tiết lộ những hiện tượng tâm lý mới lạ và thú vị. Ông đã khẳng định rằng: chúng ta thường bị ảnh hưởng bởi một “hệ thống” phi lý trí vô hình.&nbsp;</p><p>Ông đã kết hợp những nghiên cứu khoa học với những ví dụ thực tế để giúp chúng ta nhận ra những “điểm mù” trong cách suy nghĩ hàng ngày. Phi Lý Trí của Dan Ariely là một cuốn sách tâm lý học rất cuốn hút bởi ông đã sử dụng ngôn ngữ dễ hiểu nhưng vẫn khiến người đọc phải suy ngẫm về những hành vi và những sai lầm của bản thân để có thể sống một cách hợp lý và tốt đẹp hơn.</p><h4><strong>Im lặng – Sức mạnh của người hướng nội</strong></h4><p>Trong cuốn sách này, Susan Cain đã nói về sự khác biệt giữa người hướng ngoại và người hướng nội, và những ưu điểm của người có tính cách nhạy cảm. Tác giả đã chỉ ra rằng người hướng nội có thể tận dụng tính cách của mình để chọn lựa công việc, lĩnh vực phù hợp với mình trong xã hội.&nbsp;</p><p>Cuốn sách này sẽ rất hữu ích cho bạn nếu bạn là người hướng nội muốn tìm đường đi cho bản thân, hoặc nếu bạn muốn hiểu thêm về người hướng nội để có thể quản lý, giao tiếp và hợp tác tốt hơn với họ.</p><h4><strong>Tâm Lý Học Đám Đông – Gustave Le Bon</strong></h4><p>Tác giả Gustave Le Bon, một nhà tâm lý học Pháp nổi tiếng, đã viết cuốn sách Tâm lý học đám đông để nghiên cứu về sự ảnh hưởng của đám đông đến lý trí và cảm xúc của con người. Tác giả đã dựa trên nhiều nghiên cứu về tinh thần và tính cách của các dân tộc, chủng tộc khác nhau trên thế giới. Tác giả đã cho rằng, con người bị chi phối bởi những yếu tố sinh học và tâm lý học. Chủng tộc là một thực thể ẩn sâu trong mỗi cá nhân và có ảnh hưởng đến mọi hành động, ham muốn, xung năng của họ. Tác giả cũng đã trải qua nhiều biến động lịch sử của Pháp, như Công Xã Paris, cách mạng Pháp 1789 và 1848. Những trải nghiệm này đã giúp tác giả có những quan sát và phân tích từ thực tiễn được thể hiện rõ nét trong cuốn sách Tâm lý học đám đông.</p>', 0, 1, '2023-12-03 13:45:32', '2024-08-07 09:44:46'),
+(9, 9, '9 món bánh mà không nên bỏ lỡ dịp mùa đông', 'top-9-sach.jpg', 'Admin', '<p><strong>Bạn quan tâm đến tình hình kinh tế thế giới, bạn muốn bắt đầu một sự nghiệp kinh doanh mà phân vân không biết nền kinh tế thực sự vận hành như thế nào, bạn muốn tìm hiểu một tựa sách về kinh tế nhưng vẫn đang phân vân. Bài viết này sẽ giải đáp hết thắc mắc đó. Cùng tìm hiểu những cuốn sách về kinh doanh hay nhất được chúng tớ tổng hợp nhé.</strong></p><h4><strong>Thế giới phẳng – Thomas L.Friedman</strong></h4><p>Sách kinh tế Thế giới phẳng nói về vấn đề toàn cầu hóa dưới góc độ phân tích độc đáo. Theo tác giả, “phẳng” trong thế giới phẳng đó là sự kết nối, phá vỡ đi rào cản về chính trị, tôn giáo, địa lý, từ đó mở ra địa chính trị, địa kinh tế, phương thức sản xuất kinh doanh tiên tiến hiện đại hơn.</p><p>Cuốn sách tập trung mổ xẻ cấu trúc của nền kinh tế và chính trị đương đại, nêu rõ sự phát triển vượt bậc của khoa học kỹ thuật làm thay đổi diện mạo của nền kinh tế thế giới. Bằng cách trình bày hóm hỉnh hài hước, tác giả đã giúp người đọc hiểu thế giới phẳng được bắt đầu khi nào, diễn tiến ra sao, các yếu tố then chốt làm thế giới phẳng. Thông qua cuốn sách, các doanh nghiệp, quốc gia, cá nhân nhìn nhận rõ được cơ hội và thách thức trong bối cảnh toàn cầu hóa, từ đó đưa ra định hướng phát triển riêng cho mình.</p><h4><strong>Lược sử kinh tế học – Niall Kishtainy</strong></h4><p>Sách kinh tế Lược sử kinh tế học luôn nằm trong top những cuốn sách bán chạy nhất hiện nay. Đọc xong cuốn sách mọi người sẽ cảm nhận được kinh tế học không phải là những kiến thức cao siêu dành cho các doanh nhân, chính khách hay nhà kinh tế học mà nó có ích và gần gũi với cuộc sống củ mỗi người. Mỗi người trong thời đại hiện nay đều cần nắm được các kiến thức cơ bản về kinh tế để giúp cuộc sống của mình được tốt đẹp hơn.</p><p>Nội dung sách tập trung nói về các học thuyết và quy luật kinh tế kinh điển ở phương tây trong hàng nghìn năm qua dưới góc độ khác quan. Tác giả đưa ra những minh họa, ví dụ sống động và dễ hiểu để có thể tiếp cận được phần đa người đọc. Với độ dày khoảng 300 trang, sách kinh tế hay Lược sử kinh tế học giúp chúng ta nắm được các cột mốc quan trọng toàn cảnh nền kinh tế, từ lúc khởi nguồn đơn giản đến khi phức tạp hơn, xuất hiện giá trị thặng dư, buôn bán…</p><h4><strong>Doanh nghiệp của thế kỷ 21 – Robert T. Kiyosaki</strong></h4><p>Nhắc đến những cuốn sách kinh tế hay thì không thể nào kể thiếu tên cuốn Doanh nghiệp của thế kỷ 21. Cuốn sách này sẽ nêu rõ lý do tại sao cần phải xây dựng được cho mình doanh nghiệp riêng, và nên hoạt động trong lĩnh vực nào là tốt nhất. Bên cạnh đó tác giả cũng đưa ra nhiều kiến thức về tư duy làm giàu, cách tìm kiếm các phương tiện giúp xây dựng hình ảnh doanh nghiệp tốt hơn đối với khách hàng, người tiêu dùng, đối tác… Những công cụ, cách thức tìm kiếm mọi thứ để giúp doanh nghiệp phát triển toàn diện hơn cũng được bật mí chi tiết và đầy đủ nhất qua cuốn sách.</p><p>Cuốn sách khai sáng tư duy cho những ai đang mong muốn tự lập kinh doanh và làm giàu cho bản thân. Tác giả đưa ra giải pháp mà bất cứ ai cũng có thể vận dụng, áp dụng thành công mà không cần phải có tài năng hay thiên bẩm.</p><h4><strong>Tuần làm việc 4 giờ – Timothy Ferress</strong></h4><p>Một trong những cuốn sách kinh tế hay mà bạn nên đọc đó là Tuần làm việc 4 giờ. Đọc cuốn sách này, mỗi người sẽ tự trả lời được cho mình câu hỏi làm thế nào để có được cuộc sống tự do, thoải mái như một triệu phú, tỷ phú mà không cần phải có 1 triệu đô la, 1 tỷ đô la – số tiền mà ít ai có được trong suốt cuộc đời học tập, làm việc của mình. Tác giả đã giúp mỗi người biết cách tách biệt thu nhập với thời gian, từ đó xây dựng cho mình lối sống lý tưởng với nhiều hoạt động đa dạng như đi vòng quanh thế giới, đọc sách…</p><p>Từ cuốn sách, tác giả Timothy Ferress cũng đã có những chia sẻ về cách kiếm tiền 40 nghìn đô /tháng chỉ bằng cách làm 4 tiếng/tuần. Sự khác biệt của cuốn sách là đưa ra góc nhìn cuộc sống đơn giản và dễ thở hơn, thay vì đề cập đến các vấn đề thường gặp như thiếu thời gian làm việc, nghỉ ngơi, tinh thần căng thẳng… Nhìn chung mỗi người hoàn toàn có thể sống tốt với công việc mà mình có tiềm năng, quan trọng bạn cần phải khai phá tiềm năng của mình đúng đắn.</p><h4><strong>Chiến lược đại dương xanh – W. Chan Kim &amp; Renee Mauborgne</strong></h4><p>Chiến lược đại dương xanh là cuốn sách hay về kinh tế tiếp theo mà chúng tôi muốn giới thiệu đến các bạn đọc. Cuốn sách này xuất bản từ năm 2004, đến nay đã trải qua gần 20 năm nhưng vẫn giữ nguyên tính lịch sử và sự phù hợp với thời đại. Cuốn sách nổi tiếng này đã được dịch hơn 46 thứ tiếng và bán hơn 4 triệu bản trên toàn thế giới.</p><p>Nội dung cuốn sách đề cập đến chiến lược kinh doanh kinh điển mà các doanh nhân, lãnh đạo cần biết, đó là mở rộng và phát triển thị trường mới – một đại dương xanh – ở đó không có bất cứ sự cạnh tranh nào.</p><p>Chiến lược này nhấn mạnh tầm quan trọng của việc nâng cao giá trị dịch vụ cũng như sản phẩm, đi kèm với đó là giá thành hợp lý để mang lại nhiều quyền lợi cho người tiêu dùng. Chiến lược này có thể đưa các doanh nghiệp phát triển nhảy vọt và tăng trưởng mạnh mẽ về giá trị.</p>', 0, 1, '2023-12-03 17:41:06', '2024-08-07 09:45:06');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `post_categories`
+-- Cấu trúc bảng cho bảng `post_categories`
 --
 
 CREATE TABLE `post_categories` (
   `id` int NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_general_ci NOT NULL
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `post_categories`
+-- Đang đổ dữ liệu cho bảng `post_categories`
 --
 
 INSERT INTO `post_categories` (`id`, `name`) VALUES
 (1, 'Chưa có chuyên mục'),
-(2, 'Tác giả nổi tiếng'),
-(9, 'Giới thiệu sách');
+(2, 'Bánh nào ngon nhất mùa hè ?'),
+(9, 'Giới thiệu bánh');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `products`
+-- Cấu trúc bảng cho bảng `products`
 --
 
 CREATE TABLE `products` (
   `product_id` int NOT NULL,
   `category_id` int NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `image` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `image` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `quantity` int NOT NULL,
   `price` int NOT NULL,
   `sale_price` int NOT NULL,
   `create_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `views` int NOT NULL DEFAULT '0',
-  `details` text COLLATE utf8mb4_general_ci NOT NULL,
-  `short_description` text COLLATE utf8mb4_general_ci NOT NULL,
+  `details` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `short_description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `status` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `products`
+-- Đang đổ dữ liệu cho bảng `products`
 --
 
 INSERT INTO `products` (`product_id`, `category_id`, `name`, `image`, `quantity`, `price`, `sale_price`, `create_date`, `views`, `details`, `short_description`, `status`) VALUES
@@ -347,65 +246,60 @@ INSERT INTO `products` (`product_id`, `category_id`, `name`, `image`, `quantity`
 (15, 17, 'Hành Trình Về Phương Đông', 'hanh-trinh-ve-phuong-dong.jpg', 50, 118000, 95000, '2023-11-20 23:05:47', 0, '<p>Nếu là một mọt sách thì chắc hản chúng ta ít nhất đã từng nghe qua tên cuốn sách <i>Hành trình về phương Đông, </i>mình cũng vậy, cũng từng tò mò, từng có ham muốn mãnh liệt đọc cuốn sách được mệnh danh all time best selling book này, và quả thực trải nghiệm đọc cuốn sách này thật khó có thể truyền đạt bằng lời nói hay ngôn ngữ ký hiệu như chúng ta vẫn đang thấy ở đây. Nhưng quả thực mình vẫn muốn chia sẻ và để lại một chút gì đó cảm nhận của bản thân về những điều mình học được, mình suy ngẫm hay ít ra là cho rằng là những nội dung mà sách hướng tới.&nbsp;</p><p><strong>Về tác giả Baird Thomas Spalding</strong></p><p>Là một nhà văn tâm linh người Mĩ sống vào cuốn thế kỷ XVIII đầu thế kỷ IX, những thông tin vè quê quán của ông hiện nay vẫn còn nhiều tranh cãi. Ông là nhà văn tâm linh với tác phẩm nổi tiếng Life and Teachng of the Masters of the Far East (tạm dịch: Cuộc đời các chân sư phương Đông).</p>', '<p>Nhà xuất bản: <strong>NXB Thế Giới</strong> &nbsp; &nbsp; &nbsp;Tác giả: <strong>Baird T Spalding</strong></p>', 1),
 (16, 17, 'Huyền Thuật Và Các Đạo Sĩ Tây Tạng', 'huyen-thuat-tay-trang.jpg', 200, 110000, 90000, '2023-11-20 23:09:13', 0, '<p><strong>HÀNH TRÌNH 12 NĂM TRONG ĐẤT PHẬT HUYỀN BÍ&nbsp;</strong></p><p>Gần 100 năm kể từ ngày ra mắt, Mystyquet et Magiciens du Tibet, cuốn sách vang dội châu Âu của nữ tác giả người Pháp Alexandra David – Neel, mới có dịp đến tay bạn đọc Việt Nam với tên gọi&nbsp;Huyền thuật và các đạo sĩ Tây Tạng. Cuốn sách là một thiên phóng sự đáng kinh ngạc của tác giả trong hành trình xuyên qua vùng đất Tây Tạng để khám phá các huyền thuật của đạo sĩ nơi đây.&nbsp;</p><p>Với ý định tiếp kiến Đức Đạt Lai Lạt Ma đời thứ 13 đang lánh nạn tại Ấn Độ (vì xung đột chính trị với triều đại Mãn Thanh), Alexandra David – Neel không ngờ các bí mật về huyền thuật Tây Tạng lẫn lời chỉ dẫn sâu xa của những vị đạo sư đã dẫn bà đi xa hơn dự định ban đầu của mình. Sau 12 năm rong ruổi khắp Tây Tạng, Alexandra đã để lại tập sách Huyền thuật và các đạo sĩ Tây Tạng như một công trình nghiên cứu quan trọng về vùng đất đầy bí ẩn này.</p><p>&nbsp;</p>', '<p>Nhà xuất bản: <strong>NXB Thế Giới</strong> &nbsp; &nbsp; &nbsp;Tác giả: <strong>Alexandra David Neel</strong></p>', 1),
 (17, 17, 'Muôn Kiếp Nhân Sinh', 'muonkiepnhansinh.jpg', 30, 270000, 187000, '2023-11-20 23:12:48', 0, '<p><i><strong>Muôn kiếp nhân sinh</strong></i> là một bộ sách về <a href=\"https://vi.wikipedia.org/wiki/T%C3%A2m_linh\">tâm linh</a> do giáo sư John Vũ sáng tác dưới <a href=\"https://vi.wikipedia.org/wiki/B%C3%BAt_danh\">bút danh</a> Nguyên Phong và được công ty <a href=\"https://vi.wikipedia.org/wiki/First_News\">First News</a> phát hành năm 2020. Thông qua hành trình trải nghiệm quá khứ qua nhiều kiếp sống của một doanh nhân người Mỹ, tác phẩm bàn về <a href=\"https://vi.wikipedia.org/wiki/Quan_h%E1%BB%87_nh%C3%A2n_qu%E1%BA%A3\">luật nhân quả</a>, sự <a href=\"https://vi.wikipedia.org/wiki/Lu%C3%A2n_h%E1%BB%93i\">luân hồi</a>, <a href=\"https://vi.wikipedia.org/wiki/T%C3%A1i_sinh_(Ph%E1%BA%ADt_gi%C3%A1o)\">tái sinh</a> và cuộc sống của con người.</p><p>Sau thành công của tác phẩm phóng tác <i>Hành trình về phương Đông</i>, Nguyên Phong nhận được sự chú ý của độc giả Việt Nam qua những ấn phẩm dịch thuật về tâm linh. Điều này đã thu hút sự chú ý của Giám đốc công ty <a href=\"https://vi.wikipedia.org/wiki/First_News\">First News</a> Nguyễn Văn Phước, là tiền đề cho quá trình hợp tác lâu dài giữa Nguyên Phong với công ty này. Năm 2017, Nguyên Phong bắt tay vào sáng tác <i>Muôn kiếp nhân sinh</i>.</p>', '<p>Nhà xuất bản: <strong>NXB Thế Giới</strong> &nbsp; &nbsp; &nbsp;Tác giả: <strong>Nguyên Phong</strong></p>', 1),
-(18, 6, 'Thần thoại', 'than-thoai.jpg', 66, 150000, 120000, '2023-11-20 23:20:33', 0, '<figure class=\"table\"><table><tbody><tr><td>Ngày</td><td>THÁNG</td></tr><tr><td>10</td><td>11</td></tr></tbody></table></figure>', '<ul><li>ngay sx: 20 /11/2003</li><li>name 20336</li></ul>', 1),
-(20, 2, 'Chưa kịp lớn', 'chua-kip-lon.jpg', 55, 200000, 160000, '2023-11-20 23:31:04', 0, '<h4>Chưa kịp lớn</h4>', '<ul><li>NXB: HCM</li><li>NXB: HCM</li></ul>', 1),
-(21, 17, 'TalMud - Tinh Hoa Trí Tuệ Do Thái', 'tinh-hoa-tri-tue.jpg', 20, 110000, 88000, '2023-11-23 09:54:06', 0, '', '', 1),
-(23, 6, 'Sách đất rừng', 'dat-rung.jpg', 30, 150000, 120000, '2023-11-23 12:19:16', 0, '', '<ul><li>Tác giả: Khoa Nguyễn</li><li>NXB: Kim Đồng 2023</li></ul>', 1),
-(24, 6, 'Thể xác tâm hồn', 'the-xac.jpg', 123, 150000, 120000, '2023-11-23 12:20:16', 0, '<h4>Sách Thể xác tâm hồn</h4><p>&nbsp;</p>', '<ul><li>Tác giả: Khả Hi &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;NXB: Kim Đồng</li><li>Xuất xứ: Việt Nam &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Giấy phép: VN060503</li></ul>', 1),
-(25, 4, 'Cây cam ngọt', 'cay-cam-ngot.jpg', 50, 200000, 160000, '2023-11-23 16:21:03', 2, '<p><strong>Bắt đầu viết sách từ năm 22 tuổi nhưng hơn 20 năm sau, José Mauro de Vasconcelos mới nổi tiếng nhờ tiểu thuyết Cây cam ngọt của tôi chỉ dày hơn 200 trang.</strong></p><p>Khi được dịch và phát hành năm 2020 tại Việt Nam, cuốn sách của José Mauro de Vasconcelos đã trở thành hiện tượng thu hút độc giả, lọt vào danh sách bán chạy của nhà sách Nhã Nam.&nbsp;</p><p>Suốt 50 năm qua, cuốn sách đã đem lại sự nổi tiếng cho tác giả. Đây là một phần của bộ tứ tiểu thuyết do Mauro viết, tập trung vào các giai đoạn khác nhau trong cuộc đời của nhân vật chính, Zezé.</p><p>Trong lần đầu xuất bản vào năm 1968, sách bán được hơn 200.000 bản, trở thành tác phẩm bán chạy nhất trong lịch sử của Brazil. Tác phẩm được đưa vào chương trình giảng dạy của các trường tiểu học và dịch ra 19 thứ tiếng phát hành ở Mỹ, châu Âu, châu Á.&nbsp;</p><p>Các nhà làm phim cũng chuyển thể <i>Cây cam ngọt của tôi </i>thành phim truyền hình dài tập và phim điện ảnh. Sau khi qua đời năm 1984, José Mauro de Vasconcelos được đặt tên cho nhiều thư viện và hiệp hội văn hóa trên khắp Brazil.&nbsp;</p>', '<p>Nhà xuất bản: <strong>NXB Thế Giới</strong> &nbsp; &nbsp; &nbsp;Tác giả: <strong>Vasconcelos</strong></p>', 1),
-(26, 2, 'Hai số phận bi đát(2022)', 'hai-so-phan.jpg', 50, 380000, 200000, '2023-11-23 16:23:55', 0, '<p>Hai số phận (có tên gốc tiếng Anh là: Kane and Abel) là một cuốn tiểu thuyết được sáng tác vào năm 1979 bởi nhà văn người Anh <strong>Jeffrey Archer</strong>. Tựa đề Kane and Abel dựa theo câu chuyện của anh em: Cain và Abel trong Kinh Thánh Cựu Ước.</p><p>Nội dung tác phẩm nói về hai số phận của hai người đàn ông khác nhau có tên Kane &amp; Abel, họ có lẽ sẽ có gì liên quan đến nhau ngoại trừ việc cùng được sinh ra cùng giờ, cùng ngày, cùng tháng và cùng năm. Tất nhiên, hai số phận của họ lại rẽ theo hai hướng hoàn toàn khác biệt nhau.&nbsp;</p>', '<p>Nhà xuất bản: <strong>Kim đồng&nbsp;</strong> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Tác giả: <strong>Jeffrey Archer</strong></p>', 1),
-(27, 4, 'Người bà tài giỏi(tái bản 2022)', 'nguoi-ba.jpg', 30, 250000, 180000, '2023-11-23 20:31:17', 0, '<p>Là câu chuyện về cậu bé Tokunaga Akihiro, học sinh lớp 2, chuyển từ Hiroshima về Saga để sống cùng bà ngoại (và dựa trên câu chuyện có thật của chính tác giả). Luôn có những cú đẩy quan trọng trong cuộc đời mỗi người, và \"cú đẩy\" (theo cả nghĩa đen lẫn nghĩa bóng) với Akihiro ở sân ga Hiroshima hôm ấy đã khiến cuộc đời cậu thay đổi hoàn toàn.</p><p>&nbsp;</p>', '<p>Nhà xuất bản: <strong>Kim đồng&nbsp;</strong> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Tác giả: <strong>Yoshichi Shimada</strong></p>', 1),
-(28, 16, 'Nghĩ Giàu Làm Giàu', 'nghi-giau.jpg', 500, 200000, 180000, '2023-11-29 20:36:43', 2, '<p>Think and Grow Rich (tạm dịch: Nghĩ Giàu Làm Giàu hoặc Suy Nghĩ và Làm Giàu) là cuốn sách được viết bởi <strong>Napoleon Hill</strong> vào năm 1937 và được quảng bá là một cuốn sách giúp phát triển cá nhân và tự lực bán chạy nhất thế giới(tham khảo tại Danh sách sách bán chạy nhất) .</p><p>Tất cả những bí mật làm giàu được Napoleon Hill chuyển tải thông qua 13 nguyên tắc quan trọng được ông đúc kết xuyên suốt gần 30 năm, 13 nguyên tắc này như một kim chỉ nam để mở toang cánh cửa giúp chúng ta đạt được những mục tiêu lớn lao của cuộc đời mình.</p><p>Đây cũng là cuốn sách đầu tiên đưa ra một triết lý đầy đủ và toàn diện về thành công của cá nhân, đồng thời cung cấp những phương pháp để tạo một ý thức thành công cũng như lập kế hoạch chi tiết để đạt được thành công đó. Các bí quyết thành công được đề cập trong cuốn sách này có thể được đúc kết ngắn gọn: tất cả bắt nguồn từ cách nghĩ. Do đó, cuốn sách này không chỉ thay đổi những điều bạn nghĩ mà còn thay đổi cả cách nghĩ của bạn; nó không dừng lại ở việc chỉ ra bạn phải làm gì mà còn cho bạn biết phải làm điều đó như thế nào để đạt được khát vọng của mình.</p>', '<p>Nhà xuất bản: <strong>NXB Thế Giới</strong> &nbsp; &nbsp; &nbsp;Tác giả: <strong>Napoleon Hill</strong></p>', 1),
-(29, 4, 'Nhà Giả Kim (Tái Bản 2020)', 'nha-gia-kim.jpg', 30, 80000, 50000, '2023-12-02 20:54:53', 0, '<h4>Giới thiệu sách “ Nhà giả kim - Tác giả: Paulo Coelho”</h4><p>&nbsp;</p><p>“Nhà Giả Kim” là một trong những tác phẩm hay nhất của tác giả <strong>Paulo Coelho</strong>. Cuốn sách bắt đầu bằng câu chuyện xoay quanh cậu bé chăn cừu có tên Santiago trong chuyến hành trình đi tìm kho báu của mình.</p><p>Mỗi người đều có những ước mơ và hoài bão của riêng mình. Đó có thể là những khát khao to lớn, vĩ đại hoặc là những mục tiêu tưởng chừng đơn giản, gần gũi nhưng khó có thể chinh phục. Và đặc biệt với các bạn trẻ hiện nay vẫn đang lạc hướng, hoang mang giữa dòng chảy cuộc đời bất tận, đầy cạm bẫy thử thách. Chính vì thế, hôm nay Thư viện UIT sẽ giới thiệu đến các bạn một quyển sách gối đầu giường của hàng triệu người trên thế giới và còn được mệnh danh là quyển sách bán chạy chỉ sau kinh thánh - Nhà giả kim của tác giả Paulo Coelho.</p><p>Đôi nét về tác giả Paulo Coelho, ông sinh ngày 24 tháng 8 năm 1947 ở thành phố xinh đẹp Rio de Janeiro, Brazil. Từ nhỏ, ông đã có ước mơ trở thành nhà văn nhưng bị bố mẹ ngăn cản nên ông đã theo lời bố mẹ học trường luật tại quê nhà. Những áp đặt của gia đình và xã hội lúc bấy giờ đã khiến Paulo Coelho quyết định bỏ học và bắt đầu đi du lịch. Trước khi chính thức theo đuổi sự nghiệp viết lách, ông đã làm qua rất nhiều nghề như soạn lời cho các ca sĩ, làm báo, diễn viên và giám đốc nhà hát.</p>', '<p>Nhà xuất bản: <strong>NXB Thế Giới</strong> &nbsp; &nbsp; &nbsp;Tác giả: <strong>Paulo Coelho</strong></p>', 1),
-(30, 4, 'Ngàn Mặt Trời Rực Rỡ', 'ngan-mat-troi.jpg', 50, 120000, 102000, '2023-12-02 20:56:21', 0, '<p><i><strong>Ngàn mặt trời rực rỡ</strong></i> là <a href=\"https://vi.wikipedia.org/wiki/Ti%E1%BB%83u_thuy%E1%BA%BFt\">tiểu thuyết</a> thứ hai phát hành năm <a href=\"https://vi.wikipedia.org/wiki/2007\">2007</a> của nhà văn <a href=\"https://vi.wikipedia.org/wiki/Khaled_Hosseini\">Khaled Hosseini</a>, một người <a href=\"https://vi.wikipedia.org/wiki/M%C4%A9\">Mĩ</a> gốc <a href=\"https://vi.wikipedia.org/wiki/Afghanistan\">Afghanistan</a>. Cuốn sách nhanh chóng trở thành tác phẩm bán chạy, tiếp nối sự thành công của tiểu thuyết <a href=\"https://vi.wikipedia.org/wiki/Ng%C6%B0%E1%BB%9Di_%C4%91ua_di%E1%BB%81u\"><i>Người đua diều</i></a> năm <a href=\"https://vi.wikipedia.org/wiki/2003\">2003</a> của ông. Cả hai cuốn tiểu thuyết gộp lại bán được 38 triệu bản trên toàn thế giới. Năm <a href=\"https://vi.wikipedia.org/wiki/2010\">2010</a>, <i>Ngàn mặt trời rực rỡ</i> được dịch sang <a href=\"https://vi.wikipedia.org/wiki/Ti%E1%BA%BFng_Vi%E1%BB%87t\">tiếng Việt</a>.</p><p>Thời gian trong tiểu thuyết trải dài hơn 40 năm từ thập niên 60 thế kỷ 20 đến năm 2003. Bố cục tiểu thuyết chia làm bốn phần: Phần 1 tập trung miêu tả Mariam, phần 2 và 4 miêu tả Laila và phần 3 mô tả mối quan hệ giữa hai người phụ nữ.</p>', '<p>Nhà xuất bản: <strong>NXB Thế Giới</strong> &nbsp; &nbsp; &nbsp;Tác giả: <strong>Khaled Hosseini</strong></p>', 1),
-(31, 6, 'Phương Nam', 'dat-rung-phuong-nam_ban-dien-anh.jpg', 50, 180000, 126000, '2023-12-02 20:59:06', 0, '<p><i><strong>Đất rừng phương Nam</strong></i> (tựa <a href=\"https://vi.wikipedia.org/wiki/Ti%E1%BA%BFng_Anh\">tiếng Anh</a>: <i><strong>Song of the South</strong></i>) là một bộ phim điện ảnh chuyển thể thành sách năm 2023</p><p>An là một cậu bé sinh sống ở đô thành của khu vực <a href=\"https://vi.wikipedia.org/wiki/Nam_K%E1%BB%B3_L%E1%BB%A5c_t%E1%BB%89nh\">Nam Kỳ Lục tỉnh</a> cùng với mẹ của mình vào những năm 1920&nbsp;– 1930. Ba của An là Hai Thành, một người đi theo <a href=\"https://vi.wikipedia.org/wiki/Vi%E1%BB%87t_Minh\">cách mạng</a> với mong muốn đánh đuổi thực dân Pháp ra khỏi Việt Nam. Khi danh tính của Hai Thành bị bại lộ, mẹ của An đã dẫn cậu rời khỏi đô thành dưới sự chỉ dẫn của thầy giáo Bảy. Trên đường đi thì một cuộc <a href=\"https://vi.wikipedia.org/wiki/Bi%E1%BB%83u_t%C3%ACnh\">biểu tình</a> của quần chúng nhân dân đã diễn ra khi Võ Tòng – một thành viên của tổ chức Nghĩa quân Lục tỉnh – bị bắt giữ. Tại đây, một vụ xô xát đã diễn ra giữa binh lính Pháp và những người biểu tình, dẫn đến việc mẹ của An vô tình đã bị lính Pháp bắn chết. Út Lục Lâm – một tên trộm trong thời chiến đã vô tình thấy cảnh tượng này nên hắn đã quyết định hỗ trợ An rời khỏi đó.</p>', '<p>Nhà xuất bản: <strong>NXB Thế Giới</strong> &nbsp; &nbsp; &nbsp;Tác giả: <strong>Tô Ánh Nguyệt</strong></p>', 1),
-(32, 16, 'Kiếm Tiền Từ Tiktok', 'kiem-tien-titok.jpg', 50, 120000, 100000, '2023-12-02 21:00:48', 0, '<p>TikTok là một ứng dụng mạng xã hội chuyên tạo và chia sẻ video ngắn dành cho giới trẻ. Người dùng có thể quay một video ngắn từ 15 giây, sau đó chỉnh sửa, thêm nhạc, chèn hiệu ứng… thông qua phần mềm này để tạo nên một video hoàn chỉnh cho chính mình. Không ít cá nhân thu được lợi tức trên TikTok. Ngoài ra, cũng có không ít công ty cũng xem TikTok như một địa điểm marketing mới của mình.</p><p>Nội dung sách chú ý đến mọi khía cạnh của nền tảng này kèm ví dụ đầy đủ, bắt đầu từ khái niệm TikTok đến kỹ xảo, thao tác thực tế cần có để có thể trở thành một ngôi sao trên bầu trời Tiktok với 8 nội dung đáng lưu ý:</p>', '<p>Nhà xuất bản: <strong>NXB Thế Giới</strong> &nbsp; &nbsp; &nbsp;Tác giả: <strong>Giang Trung</strong></p>', 1);
+(18, 16, 'Bông lan trứng muối - For Keto, DAS, Lowcarb, Eatclean & Tiểu đường', 'bong-lan2.jpg', 66, 150000, 120000, '2023-11-20 23:20:33', 0, '<h2>Product Description</h2><p>Bánh bông lan trứng muối dành riêng cho dân Keto, DAS, Lowcarb &amp; Tiểu đường. Cốt bánh bông xốp, ngọt dịu kết hợp cùng sốt dầu trứng thơm ngậy hoặc sốt phô mai ngọt thanh. Đây là sự lựa chọn \"an toàn\" nhất trong menu Bếp Gừng vì phù hợp với đa số khẩu vị khách hàng, rất xứng đáng để bạn cho vào giỏ hàng!</p><p><br>HSD: 1 tháng (Note tượng trưng theo yêu cầu của shopee để được phê duyệt món) Nếu còn thắc mắc hay gặp vấn đề cần hỗ trợ, bạn đừng ngại ngần liên hệ với Bếp theo các thông tin dưới đây để chúng mình tư vấn, giải quyết cho bạn nhé! Cảm ơn bạn đã luôn tin tưởng và ủng hộ Bếp ạ!&nbsp;<br>&nbsp;</p><p>#Keto #DAS #Lowcarb #banhketohanoi #dashanoi #bếpketohanoi #banhankieng #ketofood #ketodiet #cakesdiet #dasdiet #tieuduong #tieuduongthaiky #beophi #gym #yoga #erobic #hiit #giamcan #bepnhagung #gungdasshop #tranthingocanh</p><p>&nbsp;</p>', '<p><strong>eheheheheheh</strong></p>', 1),
+(20, 2, 'Bánh bông lan tươi Gizza Original mông to (Hàng Việt Nam) - Ăn vặt, bữa sáng, bữa phụ', 'bong-lan.jpg', 55, 200000, 160000, '2023-11-20 23:31:04', 2, '<h2>Product Description</h2><p>- Bánh bông lan tươi Gizza với màu vàng nâu đặc trưng cùng hình dáng mềm xốp, mướt mịn và hương vị gây thương nhớ... Đặc biệt là dù nhỏ gọn nhưng Gizza lại cung cấp năng lượng vượt trội cho cả ngày dài.</p><p>- Là dòng bánh tươi được yêu thích hàng đầu, Gizza mang tới cảm giác mềm mịn, thơm lừng, tan ngay trong miệng khi ăn. Bánh tươi Gizza là lựa chọn hoàn hảo cho bữa ăn sáng tiện lợi của các bé và phụ huynh, vừa ngon vừa đầy đủ chất dinh dưỡng lại no lâu.</p><p>- Thành phần: Bột mì 32%, dầu hạt cải – Trứng 15% – Muối – Dextrose-Các chất : Diphosphate, natri carbonate-Sữa bột gầy, Kali Sorbate – lactose, acid điều hòa – flavourings.</p><p>- Sản xuất tại: Công ty Cổ phần sản xuất và thương mại SBT Việt Nam NAY ĐÃ CÓ THÊM KHAY ĐỰNG TRONG GÓI BÁNH giúp sản phẩm luôn giữ được hình dáng và kết cấu không bị tác động ngoại lực&nbsp;</p><p>#banhbonglan #bánh #energy #ăn_vặt #ăn_sáng #bữa_phụ #ăn_kiêng #doanvat #anvat #socola #mongto #rẻ #monglep</p>', '<p><strong>Bột mì 32%, dầu hạt cải – Trứng 15% – Mu</strong></p><p><br><i><strong>Cream Puffs</strong></i></p>', 1),
+(21, 17, 'Bánh mì nóng tại xưởng', 'a4a88a3871cc645a2d164bb3264cfb39.jpg', 20, 110000, 88000, '2023-11-23 09:54:06', 0, '<h2>Product Description</h2><p>BÁNH MỲ ĐEN HEALTHY HẠT DINH DƯỠNG! MỖI LẦN KHÁCH ĐẶT 20-30 cái! ăn dần, bánh giành cho các bạn ăn kiêng, giảm cân, eatclean! có thể bỏ tủ lạnh ngăn mát 4 ngày, ngăn đông 3 tuần( lúc ăn làm nóng bằng lò vi sóng) ! vẫn siêu thơm siêu ngon!! 35k/ chiếc ship! siêu to khổng lồ mà giá siêu yêu nhé! Bánh mỳ đen của Tiệm được ADELA Bakery sx 100% ogarnic tốt cho sức khoẻ! #banhmyden #tiembanhmedau #eatclean #ogarnic #banhmyhealthy #banhmygiamcan</p>', '<p><br><strong>Lúa mạch, hạt dinh dưỡng</strong></p><p><strong>Bột mỳ nguyên cám, hạt dinh dưỡng</strong></p>', 1),
+(23, 6, 'Bánh Gấu Nhân Kem', '272bbb798407080af204f4e7ff58dd58.jpg', 30, 150000, 120000, '2023-11-23 12:19:16', 0, '<p>Bánh gấu là bánh quy chất lượng cao với vị ngon của nhân kem sữa dừa thơm ngon. Sản phẩm là sự kết hợp giữa hương vị ngọt ngào, đậm đà của lớp kem từ bên trong và vị giòn tan của vỏ bánh bên ngoài, sẽ hấp dẫn bất kì ai mỗi khi thưởng thức. Bánh được làm từ những nguyên liệu có nguồn gốc từ thiên nhiên, đảm bảo chất lượng vệ sinh an toàn thực phẩm. Bánh có hình gấu dễ thương, ngộ nghĩnh, đáng yêu, sẽ mang lại cảm giác thú vị cho người thưởng thức. Thông số sản phẩm - Thành phần: Bột mỳ, dầu tinh luyện, đường, bơ, chất thay thế bơ cacao, chất béo thực vật tinh khiết đã được Hydro hóa, sữa bột, tinh bột ngô, trứng gà, vani, chất điều vị, chất chống oxy hóa, màu thực phẩm. - Xuất xứ: Việt Nam - Trọng lượng: 1 thùng/5kg #lưuý : Trong quá trình đóng gói shop đã lựa chọn bỏ hết cái vỡ, nhưng khi vận chuyển xa không tránh khỏi có cái bị vỡ mong quý khách thông cảm.</p>', '<p>Date: &nbsp; &nbsp;&nbsp;<strong> 6 Months</strong></p>', 1),
+(24, 17, 'Bánh mỳ star dâu đỏ', 'vn-11134207-7r98o-lntmvlu9l5yycb.jpg', 123, 150000, 120000, '2023-11-23 12:20:16', 0, '<h2>Product Description</h2><p>Hương vị: thơm ngon, mềm.</p><p>Bao bì/Mẫu mã: còn lâu</p><p>Shop giao hàng nhanh, đóng gói cẩn thận, đủ số lượng, uy tín, sản phẩm rất ổn, cảm ơn shop ạ.</p><p><br>Bánh mềm. Ngon. Mua đc mã sale rẻ quá. Tiếc k mua nhiều :D bên shop bán rẻ hơn so với shop khác. Chủ shop nhiệt tình lắm ạ. Mai mốt ủng hộ shop nhiều nhé ạ. Shop có bán bánh mochi kem lạnh. Không tẩm dừa bên ngoài k ạ?</p>', '<p><strong>Chưa có gì hết</strong></p>', 1),
+(25, 17, 'Bánh mì Star', 'vn-11134207-7r98o-lntmvlu9nz3ue8.jpg', 50, 200000, 160000, '2023-11-23 16:21:03', 2, '<p>Bánh mì tươi các vị (nho, socola, dâu, khoai môn, ruốc) Bánh mì tươi các vị (nho, socola, dâu, khoai môn, ruốc) . Xuất xứ: Việt Nam. <strong>#banhmituoi #banhmiruoc #banhmidau #banhkhoaimon #banhmisocola&nbsp;</strong></p><p>Hương vị: ngon</p><p>Bao bì/Mẫu mã: đẹp , chắc ,...ok</p><p>Sản phẩm đẹp, ngon, còn hạn, giao nhanh, shiper thân thiện, shop nhiệt tình, đúng gói chắc chắn, bánh ngon bánh có vị ngọt nói chung là được hết về mọi mặt!rẻ, đẹp chất lượng, giao nhanh…</p><p>#taphoakhangtrang #hanggiadungkhangtrang #freeship #freeshipextra</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p><br>&nbsp;</p>', '<p><strong>Công ty Bánh mì Việt Lê</strong></p><p><strong>Caffeine Free</strong><br>&nbsp;</p>', 1),
+(26, 2, 'Bánh trung thu 6 vị', 'vn-11134207-7r98o-ly1jo25x4449dc.jpg', 45, 380000, 200000, '2023-11-23 16:23:55', 15, '<p>Set 6 bánh trung thu mini 75g ADELA BAKERY</p><p>Gồm 6 vị:</p><p>Đậu đỏ</p><p>Sen trà tảo</p><p>Sầu riêng</p><p>Cafe rum nho</p><p>Khoai môn hạt điều</p><p>Đậu xanh</p><p>Sỉ từ 10 hộp chỉ từ 5x</p><p>Hsd: 20 ngày</p><p>Hotline: 0902 11 9696 - 094 658 9399</p><p><br><img src=\"https://down-vn.img.susercontent.com/file/vn-11134208-7r98o-ly1qjdfq7paz13\" width=\"873\" height=\"784\"></p><p><br>&nbsp;</p>', '<p><strong>Brand</strong> &nbsp; &nbsp; &nbsp;<a href=\"https://shopee.vn/search?brands=1063859\">Adela</a></p><p><strong>Country of Origin&nbsp;</strong> &nbsp; &nbsp; Vietnam</p><p><strong>Food Type</strong> &nbsp; &nbsp; &nbsp;Seasonal</p><p><strong>Manufacturer/trader address</strong> &nbsp; &nbsp; &nbsp;Công ty TNHH Adela</p>', 1),
+(27, 4, 'Bánh kem dâu tây hot trend', 'vn-11134207-7r98o-lwuah67z89uh6d.jpg', 30, 250000, 180000, '2023-11-23 20:31:17', 0, '<h2>Product Description</h2><p>Bánh sinh nhật là món quà không thể thiếu khi đến ngày sinh nhật. Và cả năm có 1 lần hãy để bên em phục vụ ạ ^^ Ai đã từng ăn nhà em rồi chắc hẳn vừa ngon vừa rẻ. Bánh đặt trước 15-30 phút là xong. Tội gì ko đặt bánh- bánh vừa mới- vừa mềm- vừa đẹp Bánh sinh nhật chỉ ship hoả tốc nội thành Hà Nội. Lh: 0984246869 địa chỉ: 22 ngõ 126 Phố Mễ Trì Hạ, Từ Liêm, HN</p>', '<p><strong>Cream</strong></p>', 1),
+(28, 16, 'Bánh hoa tulip', 'vn-11134207-7r98o-lnwi5ma4ep657a.jpg', 500, 200000, 180000, '2023-11-29 20:36:43', 2, '<h2>Product Description</h2><p>bánh hot trend hoa tulip. Món quà tặng cho các mẹ, các chị em, ng iu ngày quan trọng thật đẹp và rực rỡ luôn ạ số điện thoại liên hệ: 0984246869</p>', '<p><strong>Cream ngon ngọt</strong></p>', 1),
+(29, 4, 'Bánh kem mẫu 2 con chuột cute', 'e06ae1cdd1ccfc15a4d8fdb55426dff8.jpg', 30, 80000, 50000, '2023-12-02 20:54:53', 5, '<h2>Product Description</h2><p>Bánh sinh nhật là món quà không thể thiếu khi đến ngày sinh nhật. Ai đã từng ăn nhà em rồi chắc hẳn vừa ngon vừa rẻ. Bánh đặt trước 15-30 phút là xong. Tội gì ko đặt bánh- bánh vừa mới- vừa mềm- vừa đẹp Lh: 0984246869 địa chỉ: 22 ngõ 126 Phố Mễ Trì Hạ, Từ Liêm, HN</p>', '<p><strong>Ice cream Cake</strong></p><p><strong>Twin Pack</strong></p>', 1),
+(30, 17, 'Bánh mì nguyên cám mix hạt ADELA BAKERY', '56547d9660b4591809b51ff3d34b3878.jpg', 50, 120000, 102000, '2023-12-02 20:56:21', 8, '<h2>Product Description</h2><p>BÁNH MỲ ĐEN HEALTHY HẠT DINH DƯỠNG! MỖI LẦN KHÁCH ĐẶT 20-30 cái! ăn dần , bánh giành cho các bạn ăn kiêng, giảm cân, eatclean! có thể bỏ tủ lạnh ngăn mát 4 ngày, ngăn đông 3 tuần( lúc ăn làm nóng bằng lò vi sóng) ! vẫn siêu thơm siêu ngon!! 35k/ chiếc ship! siêu to khổng lồ mà giá siêu yêu nhé! Bánh mỳ đen của Tiệm được ADELA Bakery sx 100% ogarnic tốt cho sức khoẻ! #banhmyden #tiembanhmedau #eatclean #ogarnic #banhmyhealthy #banhmygiamcan</p>', '<p>Hãng bánh: &nbsp; &nbsp; &nbsp;&nbsp;<strong>Khaled Hosseini</strong></p>', 1),
+(31, 6, 'Phương Nam', 'dat-rung-phuong-nam_ban-dien-anh.jpg', 50, 180000, 126000, '2023-12-02 20:59:06', 0, '<p><i><strong>Đất rừng phương Nam</strong></i> (tựa <a href=\"https://vi.wikipedia.org/wiki/Ti%E1%BA%BFng_Anh\">tiếng Anh</a>: <i><strong>Song of the South</strong></i>) là một bộ phim điện ảnh chuyển thể thành sách năm 2023</p><p>An là một cậu bé sinh sống ở đô thành của khu vực <a href=\"https://vi.wikipedia.org/wiki/Nam_K%E1%BB%B3_L%E1%BB%A5c_t%E1%BB%89nh\">Nam Kỳ Lục tỉnh</a> cùng với mẹ của mình vào những năm 1920&nbsp;– 1930. Ba của An là Hai Thành, một người đi theo <a href=\"https://vi.wikipedia.org/wiki/Vi%E1%BB%87t_Minh\">cách mạng</a> với mong muốn đánh đuổi thực dân Pháp ra khỏi Việt Nam. Khi danh tính của Hai Thành bị bại lộ, mẹ của An đã dẫn cậu rời khỏi đô thành dưới sự chỉ dẫn của thầy giáo Bảy. Trên đường đi thì một cuộc <a href=\"https://vi.wikipedia.org/wiki/Bi%E1%BB%83u_t%C3%ACnh\">biểu tình</a> của quần chúng nhân dân đã diễn ra khi Võ Tòng – một thành viên của tổ chức Nghĩa quân Lục tỉnh – bị bắt giữ. Tại đây, một vụ xô xát đã diễn ra giữa binh lính Pháp và những người biểu tình, dẫn đến việc mẹ của An vô tình đã bị lính Pháp bắn chết. Út Lục Lâm – một tên trộm trong thời chiến đã vô tình thấy cảnh tượng này nên hắn đã quyết định hỗ trợ An rời khỏi đó.</p>', '<p>Nhà xuất bản: <strong>NXB Thế Giới</strong> &nbsp; &nbsp; &nbsp;Tác giả: <strong>Tô Ánh Nguyệt</strong></p>', 0),
+(32, 16, 'Kiếm Tiền Từ Tiktok', 'kiem-tien-titok.jpg', 50, 120000, 100000, '2023-12-02 21:00:48', 1, '<p>TikTok là một ứng dụng mạng xã hội chuyên tạo và chia sẻ video ngắn dành cho giới trẻ. Người dùng có thể quay một video ngắn từ 15 giây, sau đó chỉnh sửa, thêm nhạc, chèn hiệu ứng… thông qua phần mềm này để tạo nên một video hoàn chỉnh cho chính mình. Không ít cá nhân thu được lợi tức trên TikTok. Ngoài ra, cũng có không ít công ty cũng xem TikTok như một địa điểm marketing mới của mình.</p><p>Nội dung sách chú ý đến mọi khía cạnh của nền tảng này kèm ví dụ đầy đủ, bắt đầu từ khái niệm TikTok đến kỹ xảo, thao tác thực tế cần có để có thể trở thành một ngôi sao trên bầu trời Tiktok với 8 nội dung đáng lưu ý:</p>', '<p>Nhà xuất bản: <strong>NXB Thế Giới</strong> &nbsp; &nbsp; &nbsp;Tác giả: <strong>Giang Trung</strong></p>', 0);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Cấu trúc bảng cho bảng `users`
 --
 
 CREATE TABLE `users` (
   `user_id` int NOT NULL,
-  `username` varchar(100) COLLATE utf8mb4_general_ci NOT NULL COMMENT 'Tên đăng nhập',
-  `password` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `full_name` varchar(255) COLLATE utf8mb4_general_ci NOT NULL COMMENT 'Họ tên',
-  `image` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `phone` varchar(10) COLLATE utf8mb4_general_ci NOT NULL,
-  `address` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `username` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'Tên đăng nhập',
+  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `full_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'Họ tên',
+  `image` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `phone` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `address` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `role` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0 là khách hàng 1 là nhân viên',
   `active` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `users`
+-- Đang đổ dữ liệu cho bảng `users`
 --
 
 INSERT INTO `users` (`user_id`, `username`, `password`, `full_name`, `image`, `email`, `phone`, `address`, `role`, `active`) VALUES
-(6, 'khoanguyen', '$2y$10$lkTB87KYB/DODbLsSsq7ZOfptwLQOuwXKpe8M9Y4pB5iPEh6k07f2', 'Nguyễn Lê Anh Khoa', 'khoanguyen.jpg', 'khoanlapc06444@gmail.com', '0909135329', 'Ninh Kiều, Cần Thơ', 0, 1),
-(7, 'khahi', '$2y$10$sF.yA6lAhvCE1vhwffwijuzA3JMoVhgnxkk.FdqXR4HVHlHdnXHzK', 'Lê Châu Khả Hi', 'user-default.png', 'hilckpc06524@fpt.edu.vn', '0336216654', 'Kiên Giang', 0, 1),
 (8, 'admin', '$2y$10$zwNwMKly8otZrxWr6BTTxuRdX5eGj/2FbZT3wI3TfQ6Io8/jgAlLC', 'Admin', 'user-default.png', 'khoacntt2003@gmail.com', '0336216559', 'Cần Thơ', 1, 1),
-(9, 'tranvana', '$2y$10$ts748iCUjwA5HpQBMLuROuAXa70addsKmfkMh9rYIw/PjhxLLwH8i', 'Trần Văn A', 'user-default.png', 'tranvana@gmail.com', '0909135969', 'Cái Răng, Cần Thơ', 0, 1),
-(10, 'haohao', '$2y$10$gcBHpzElBGDkOv5EEzJFhuoireNk2HsaloJQLy2KHvzGqx6MIyYku', 'Mai Hảo Hảo', 'user-default.png', 'haomhpc07316@fpt.edu.vn', '0909135985', 'Ninh Kiều, Cần Thơ', 0, 1),
-(11, 'tuankiet', '$2y$10$ENy4z0Infjac7VjlKYp2A.gqCBwc8N01tKGLT9A3buGdVoyd7sXnK', 'Đặng tuấn Kiệt', 'user-default.png', 'kietdtpc06764@fpt.edu.vn', '0909006764', 'Cần Thơ', 0, 1),
-(12, 'khoanguyen111', '$2y$10$ZPAY2O7ntfQ5/Huv3dUAIuY4qHuPD/DpRxiw11TurgYr3hCrWfnv2', 'Nguyễn Lê Anh Khoa', 'khoanguyen.jpg', 'khoanlapc1234@gmail.com', '0336216546', 'Cần Thơ', 0, 1),
-(13, 'khoanguyen001', '$2y$10$ptSvfsaT78h4LdZQNCrKdemlC.AqyZ/q5cudTk9/FKcbe6TtJDJAC', 'Nguyễn Lê Anh Khoa', 'user-default.png', 'khoanla113@gmail.com', '0336216555', 'Can tho', 0, 1);
+(15, 'tus204', '$2y$10$wSgpv97va9U0x.E0XgWZiO6ucoWkt08j73z4VTkhxXiJaGwP913Gm', 'Đặng Đình Anh Tú', 'user-default.png', 'tuwtf2605@gmail.com', '0976542314', 'Ha Noi', 1, 1),
+(16, 'tusdz', '$2y$10$HMfEX8jeleKPBxqyIm.R2e9FRkD6hG2qrVpIpwtJMMgidR5cDXw7i', 'dang dinh anh tu', 'user-default.png', 'tuddaph43370@fpt.edu.vn', '0974566306', 'Mỹ Đình, HN', 0, 1);
 
 --
--- Indexes for dumped tables
+-- Chỉ mục cho các bảng đã đổ
 --
 
 --
--- Indexes for table `banners`
+-- Chỉ mục cho bảng `banners`
 --
 ALTER TABLE `banners`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `carts`
+-- Chỉ mục cho bảng `carts`
 --
 ALTER TABLE `carts`
   ADD PRIMARY KEY (`cart_id`),
@@ -413,13 +307,13 @@ ALTER TABLE `carts`
   ADD KEY `user_id` (`user_id`);
 
 --
--- Indexes for table `categories`
+-- Chỉ mục cho bảng `categories`
 --
 ALTER TABLE `categories`
   ADD PRIMARY KEY (`category_id`);
 
 --
--- Indexes for table `comments`
+-- Chỉ mục cho bảng `comments`
 --
 ALTER TABLE `comments`
   ADD PRIMARY KEY (`comment_id`),
@@ -427,7 +321,7 @@ ALTER TABLE `comments`
   ADD KEY `user_id` (`user_id`);
 
 --
--- Indexes for table `orderdetails`
+-- Chỉ mục cho bảng `orderdetails`
 --
 ALTER TABLE `orderdetails`
   ADD PRIMARY KEY (`orderdetails_id`),
@@ -435,141 +329,141 @@ ALTER TABLE `orderdetails`
   ADD KEY `product_id` (`product_id`);
 
 --
--- Indexes for table `orders`
+-- Chỉ mục cho bảng `orders`
 --
 ALTER TABLE `orders`
   ADD PRIMARY KEY (`order_id`),
   ADD KEY `user_id` (`user_id`);
 
 --
--- Indexes for table `posts`
+-- Chỉ mục cho bảng `posts`
 --
 ALTER TABLE `posts`
   ADD PRIMARY KEY (`post_id`),
   ADD KEY `category_id` (`category_id`);
 
 --
--- Indexes for table `post_categories`
+-- Chỉ mục cho bảng `post_categories`
 --
 ALTER TABLE `post_categories`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `products`
+-- Chỉ mục cho bảng `products`
 --
 ALTER TABLE `products`
   ADD PRIMARY KEY (`product_id`),
   ADD KEY `fk_category` (`category_id`);
 
 --
--- Indexes for table `users`
+-- Chỉ mục cho bảng `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`user_id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT cho các bảng đã đổ
 --
 
 --
--- AUTO_INCREMENT for table `banners`
+-- AUTO_INCREMENT cho bảng `banners`
 --
 ALTER TABLE `banners`
   MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `carts`
+-- AUTO_INCREMENT cho bảng `carts`
 --
 ALTER TABLE `carts`
-  MODIFY `cart_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=168;
+  MODIFY `cart_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=181;
 
 --
--- AUTO_INCREMENT for table `categories`
+-- AUTO_INCREMENT cho bảng `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `category_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `category_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
--- AUTO_INCREMENT for table `comments`
+-- AUTO_INCREMENT cho bảng `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `comment_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `comment_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
--- AUTO_INCREMENT for table `orderdetails`
+-- AUTO_INCREMENT cho bảng `orderdetails`
 --
 ALTER TABLE `orderdetails`
-  MODIFY `orderdetails_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=98;
+  MODIFY `orderdetails_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=109;
 
 --
--- AUTO_INCREMENT for table `orders`
+-- AUTO_INCREMENT cho bảng `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `order_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `order_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
 
 --
--- AUTO_INCREMENT for table `posts`
+-- AUTO_INCREMENT cho bảng `posts`
 --
 ALTER TABLE `posts`
   MODIFY `post_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
--- AUTO_INCREMENT for table `post_categories`
+-- AUTO_INCREMENT cho bảng `post_categories`
 --
 ALTER TABLE `post_categories`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
--- AUTO_INCREMENT for table `products`
+-- AUTO_INCREMENT cho bảng `products`
 --
 ALTER TABLE `products`
   MODIFY `product_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
--- AUTO_INCREMENT for table `users`
+-- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `user_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
--- Constraints for dumped tables
+-- Các ràng buộc cho các bảng đã đổ
 --
 
 --
--- Constraints for table `carts`
+-- Các ràng buộc cho bảng `carts`
 --
 ALTER TABLE `carts`
   ADD CONSTRAINT `carts_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`),
   ADD CONSTRAINT `carts_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
 
 --
--- Constraints for table `comments`
+-- Các ràng buộc cho bảng `comments`
 --
 ALTER TABLE `comments`
   ADD CONSTRAINT `comments_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`),
   ADD CONSTRAINT `comments_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
 
 --
--- Constraints for table `orderdetails`
+-- Các ràng buộc cho bảng `orderdetails`
 --
 ALTER TABLE `orderdetails`
   ADD CONSTRAINT `orderdetails_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`),
   ADD CONSTRAINT `orderdetails_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`);
 
 --
--- Constraints for table `orders`
+-- Các ràng buộc cho bảng `orders`
 --
 ALTER TABLE `orders`
   ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
 
 --
--- Constraints for table `posts`
+-- Các ràng buộc cho bảng `posts`
 --
 ALTER TABLE `posts`
   ADD CONSTRAINT `posts_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `post_categories` (`id`);
 
 --
--- Constraints for table `products`
+-- Các ràng buộc cho bảng `products`
 --
 ALTER TABLE `products`
   ADD CONSTRAINT `fk_category` FOREIGN KEY (`category_id`) REFERENCES `categories` (`category_id`);

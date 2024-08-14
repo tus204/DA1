@@ -1,4 +1,5 @@
 
+
 <?php
     if(isset($_SESSION['user'])) {
         $user_id = $_SESSION['user']['id'];
@@ -19,6 +20,7 @@
         </div>
     </div>
 </div>
+
 <?php
     foreach ($list_orders as $value) {
         extract($value);
@@ -35,6 +37,7 @@
 
         $date_formated = $BaseModel->date_format($date, '');
 ?>
+
 <div class="container pt-4 mb-0">
     <article class="card">
         <div class="card-header" style="background-color: #f9f9f9">

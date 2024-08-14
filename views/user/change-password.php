@@ -84,7 +84,7 @@
             }
         }
     }
-    
+
     if(isset($_COOKIE['success_update']) && !empty($_COOKIE['success_update'])) {
         $success = $_COOKIE['success_update'];
     }

@@ -48,7 +48,7 @@
                 $error['image'] = 'File ảnh không hợp lệ chỉ được tải ảnh định dạng JPG, PNG';
             }
         }
-        
+
         if(empty(array_filter($error))) {
             $target_dir = "upload/";
             $target_file = $target_dir . basename($_FILES["image"]["name"]);

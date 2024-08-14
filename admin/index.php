@@ -7,6 +7,13 @@ if (!isset($_SESSION['user_admin'])) {
 }
 require_once "models_admin/pdo_library.php";
 require_once "models_admin/BaseModel.php";
+require_once "models_admin/CategoryModel.php";
+require_once "models_admin/ProductModel.php";
+require_once "models_admin/CustomerModel.php";
+require_once "models_admin/OrderModel.php";
+require_once "models_admin/PostModel.php";
+require_once "models_admin/CommentModel.php";
+
 require_once "components/head.php";
 require_once "components/header.php";
 

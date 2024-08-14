@@ -128,7 +128,7 @@
             </div>
 
         </div>
-        <?php
+    <?php
     } else {
     ?>
         <div class="container-fluid mt-5">
@@ -144,6 +144,7 @@
     <?php
     }
     ?>  
+
 
 </section>
 
