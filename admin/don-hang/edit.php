@@ -1,43 +1,54 @@
 <?php
-    if(isset($_GET['id']) && $_GET['id'] >0) {
-        $order_id = $_GET['id'];
-    }else {
+if (isset($_GET['id']) && $_GET['id'] > 0) {
+    $order_id = $_GET['id'];
+} else {
+    // nothing
+}
+$order_details = $OrderModel->getFullOrderInformation($order_id);
+foreach ($order_details as $value) {
+    extract($value);
+}
 
-    }
-    $order_details = $OrderModel->getFullOrderInformation($order_id);
-    foreach ($order_details as $value) {
-        extract($value);
-    }
+//Trang thái đơn hàng
+$order_status = 'Chưa xác nhận';
+if ($status == 2) {
+    $order_status = 'Đã xác nhận';
+} elseif ($status == 3) {
+    $order_status = 'Đang giao';
+} elseif ($status == 4) {
+    $order_status = 'Giao thành công';
+} elseif ($status == 5) {
+    $order_status = 'Đã hủy';
+}
 
-    //Trang thái đơn hàng
-    $order_status = 'Chưa xác nhận';
-    if($status == 2) {
-        $order_status = 'Đã xác nhận';
-    }elseif($status == 3) {
-        $order_status = 'Đang giao';
-    }elseif($status == 4) {
-        $order_status = 'Giao thành công';
-    }
+$date_formated = $BaseModel->date_format($order_date, '');
 
-    $date_formated = $BaseModel->date_format($order_date, '');
+// Cập nhật trạng thái
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["update_status_order"])) {
+    $status = isset($_POST["status"]) ? $_POST["status"] : null;
+    $order_id = $_POST["order_id"];
 
-    // Cập nhật trạng thái
-    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["update_status_order"])) {
-        $status = $_POST["status"];
-        $order_id = $_POST["order_id"];
+    if ($status !== null) {
         $OrderModel->update_status_order($status, $order_id);
+        $_SESSION['success_message'] = 'Cập nhật trạng thái đơn hàng thành công.';
         header("Location: index.php?quanli=cap-nhat-don-hang&id=$order_id");
+        exit();
+    } else {
+        $_SESSION['error_message'] = 'Vui lòng chọn trạng thái để cập nhật.';
+        header("Location: " . $_SERVER['PHP_SELF'] . "?quanli=cap-nhat-don-hang&id=$order_id");
+        exit();
     }
+}
 
 ?>
 
 <div class="container pt-4">
     <article class="card">
         <header class="card-header text-dark">
-                <h6 > 
-                    <a href="index.php?quanli=danh-sach-don-hang" class="link-not-hover">Đơn hàng</a> 
-                    / Chi tiết đơn hàng
-                </h6>
+            <h6>
+                <a href="index.php?quanli=danh-sach-don-hang" class="link-not-hover">Đơn hàng</a>
+                / Chi tiết đơn hàng
+            </h6>
         </header>
         <div class="card-body mt-2">
 
@@ -45,20 +56,21 @@
                 <?php
                 foreach ($order_details as $value) {
                     extract($value);
-                ?>
-                <li class="col-md-4">
-                    <figure class="itemside mb-3">
-                        <div class="aside"><img src="../upload/<?=$product_image?>" class="img-sm border"></div>
-                        <figcaption class="info align-self-center">
-                            <p class="title"><?=$product_name?> <br> </p> 
-                            <span class="text-danger"><?=number_format($price)?>₫ </span><span>x<?=$quantity?></span>
-                        </figcaption>
-                    </figure>
-                </li>
-                <?php
+                    ?>
+                    <li class="col-md-4">
+                        <figure class="itemside mb-3">
+                            <div class="aside"><img src="../upload/<?= $product_image ?>" class="img-sm border"></div>
+                            <figcaption class="info align-self-center">
+                                <p class="title"><?= $product_name ?> <br> </p>
+                                <span class="text-danger"><?= number_format($price) ?>₫
+                                </span><span>x<?= $quantity ?></span>
+                            </figcaption>
+                        </figure>
+                    </li>
+                    <?php
                 }
                 ?>
-                
+
 
             </ul>
             <div class="row">
@@ -66,46 +78,84 @@
                     <div class="bg-custom rounded border" style="background-color: #ffff;">
                         <div class="p-4">
                             <h6 class="mb-4">
-                                Trạng thái đơn hàng: <span class="text-danger"><?=$order_status?></span>
+                                Trạng thái đơn hàng: <span class="text-danger"><?= $order_status ?></span>
                             </h6>
                             <!-- Hiển thị trạng thái đơn vào options -->
                             <?php
-                                function getStatusName($statusValue) {
-                                    switch ($statusValue) {
-                                        case 1:
-                                            return 'Chờ xác nhận';
-                                        case 2:
-                                            return 'Đã xác nhận';
-                                        case 3:
-                                            return 'Đang giao';
-                                        case 4:
-                                            return 'Giao thành công';
-                                        default:
-                                            return 'Không xác định';
-                                    }
-                                }
+                            // function getStatusName($statusValue)
+                            // {
+                            //     switch ($statusValue) {
+                            //         case 1:
+                            //             return 'Chờ xác nhận';
+                            //         case 2:
+                            //             return 'Đã xác nhận';
+                            //         case 3:
+                            //             return 'Đang giao';
+                            //         case 4:
+                            //             return 'Giao thành công';
+                            //         case 5:
+                            //             return 'Hủy';
+                            //         default:
+                            //             return 'Không xác định';
+                            //     }
+                            // }
                             ?>
 
                             <form action="" method="post">
                                 <div class="form-floating mb-3">
-                                    <select name="status" class="form-select" id="floatingSelect" aria-label="Floating label select example" >
+                                    <select name="status" class="form-select" id="floatingSelect"
+                                        aria-label="Floating label select example">
                                         <?php
-                                        $status_options = [1, 2, 3, 4];
-                                        foreach ($status_options as $option_value) {
+                                        $status_options = [
+                                            1 => 'Chờ xác nhận',
+                                            2 => 'Đã xác nhận',
+                                            3 => 'Đang giao',
+                                            4 => 'Giao thành công',
+                                            5 => 'Hủy'
+                                        ];
+                                        foreach ($status_options as $option_value => $option_name) {
+                                            $disabled = '';
+                                            switch ($status) {
+                                                case 1:
+                                                    if ($option_value != 1 && $option_value != 2 && $option_value != 5)
+                                                        $disabled = 'disabled';
+                                                    break;
+                                                case 2:
+                                                    if ($option_value == 1 || $option_value > 3)
+                                                        $disabled = 'disabled';
+                                                    break;
+                                                case 3:
+                                                    if ($option_value < 3 || $option_value > 4)
+                                                        $disabled = 'disabled';
+                                                    break;
+                                                case 4:
+                                                    if ($option_value != 5)
+                                                        $disabled = 'disabled';
+                                                    break;
+                                                case 5:
+                                                    $disabled = 'disabled'; // huy thi disable het
+                                                    break;
+                                            }
+
+                                            if ($status == 4 && $option_value == 5) {
+                                                $disabled = 'disabled';
+                                            }
+
                                             $selected = ($option_value == $status) ? 'selected' : '';
-                                            echo "<option value='$option_value' $selected>";
+                                            echo "<option value='$option_value' $selected $disabled>$option_name</option>";
                                             // Đặt tên hoặc giá trị của option tại đây
-                                            echo getStatusName($option_value); // Thay thế hàm này bằng hàm trả về tên tương ứng
-                                            echo "</option>";
+                                            // echo getStatusName($option_value); // Thay thế hàm này bằng hàm trả về tên tương ứng
+                                            // echo "</option>";
                                         }
                                         ?>
                                     </select>
                                     <label for="floatingSelect">Trạng thái</label>
                                 </div>
-                                <input type="hidden" name="order_id" value="<?=$order_id?>">
+                                <input type="hidden" name="order_id" value="<?= $order_id ?>">
                                 <h6 class="mb-4">
-                                    <input type="submit" name="update_status_order" value="Cập nhật" class="btn btn-custom">
-                                    
+                                    <input type="submit" name="update_status_order" value="Cập nhật"
+                                        class="btn btn-custom">
+
                                 </h6>
                             </form>
 
@@ -120,7 +170,7 @@
                                     <p class="mb-0 text-right">Tên khách hàng</p>
                                 </div>
                                 <div class="col-sm-8">
-                                    <p class="mb-0 text-right"><?=$full_name?></p>
+                                    <p class="mb-0 text-right"><?= $full_name ?></p>
                                 </div>
                             </div>
                             <div class="row mb-3">
@@ -128,39 +178,39 @@
                                     <p class="mb-0 text-right">Số điện thoại</p>
                                 </div>
                                 <div class="col-sm-8">
-                                    <p class="mb-0 text-right"><?=$order_phone?></p>
+                                    <p class="mb-0 text-right"><?= $order_phone ?></p>
                                 </div>
                             </div>
-                            
+
                             <div class="row mb-3">
                                 <div class="col-sm-4">
                                     <p class="mb-0 text-right">Địa chỉ giao hàng</p>
                                 </div>
                                 <div class="col-sm-8">
-                                    <p class="mb-0 text-right"><?=$order_address?></p>
+                                    <p class="mb-0 text-right"><?= $order_address ?></p>
                                 </div>
                             </div>
-                            
+
                             <div class="row mb-3">
                                 <div class="col-sm-4">
                                     <p class="mb-0 text-right">Thời gian</p>
                                 </div>
                                 <div class="col-sm-8">
-                                    <p class="mb-0 text-right"><?=$date_formated?></p>
+                                    <p class="mb-0 text-right"><?= $date_formated ?></p>
                                 </div>
                             </div>
-                            
+
                             <div class="row mb-3">
                                 <div class="col-sm-4">
                                     <p class="mb-0 text-right">Tổng tiền hàng</p>
                                 </div>
                                 <div class="col-sm-8">
                                     <p class="mb-0 text-right">
-                                        <?=number_format($total)?>₫
+                                        <?= number_format($total) ?>₫
                                     </p>
                                 </div>
                             </div>
-                            
+
                             <div class="row mb-3">
                                 <div class="col-sm-4">
                                     <p class="mb-0 text-right">Phí vận chuyển</p>
@@ -169,13 +219,13 @@
                                     <p class="mb-0 text-right">Miễn phí</p>
                                 </div>
                             </div>
-                            
+
                             <div class="row">
                                 <div class="col-sm-4">
                                     <p class="mb-0 text-right">Ghi chú</p>
                                 </div>
                                 <div class="col-sm-8">
-                                    <p class="mb-0 text-right"><?=$note?></p>
+                                    <p class="mb-0 text-right"><?= $note ?></p>
                                 </div>
                             </div>
                             <hr>
@@ -185,7 +235,7 @@
                                 </div>
                                 <div class="col-sm-8">
                                     <p style="font-size: 1.5rem;" class="mb-0 text-right text-danger fw-500">
-                                        <?=number_format($total)?>₫
+                                        <?= number_format($total) ?>₫
                                     </p>
                                 </div>
                             </div>

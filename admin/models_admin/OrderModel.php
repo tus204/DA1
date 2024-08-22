@@ -157,7 +157,7 @@ class OrderModel
                         LEFT JOIN orderdetails ON orderdetails.product_id = products.product_id
                         LEFT JOIN orders ON orders.order_id = orderdetails.order_id
                     GROUP BY
-                        categories.category_id, products.name DESC
+                        categories.category_id, products.name
                     ORDER BY
                         total_sold_quantity DESC
                         LIMIT $top";

@@ -13,6 +13,7 @@ require_once "models_admin/CustomerModel.php";
 require_once "models_admin/OrderModel.php";
 require_once "models_admin/PostModel.php";
 require_once "models_admin/CommentModel.php";
+require_once "models_admin/BannerModel.php";
 
 require_once "components/head.php";
 require_once "components/header.php";
@@ -23,11 +24,20 @@ if (!isset($_GET['quanli'])) {
     require_once "home.php";
 } else {
     switch ($_GET['quanli']) {
+
+        case 'danh-sach-banner':
+            require_once "banner/list.php";
+            break;
+        case 'them-banner':
+            require_once "banner/add.php";
+            break;
+        case 'cap-nhat-banner':
+            require_once "banner/edit.php";
+            break;
         case 'danh-sach-san-pham':
             require_once "san-pham/list.php";
             break;
         case 'them-san-pham':
-
             require_once "san-pham/add.php";
             break;
         case 'cap-nhat-san-pham':
@@ -124,8 +134,9 @@ if (!isset($_GET['quanli'])) {
         case 'luot-ban-theo-ngay':
             require_once "thong-ke/chart-order-date.php";
             break;
-        case 'xuat-exel':
-            require_once "export_exel/export_orders.php";
+        // export excel
+        case 'xuat-excel':
+            require_once "export_excel/export_orders.php";
             break;
 
 

@@ -1,30 +1,34 @@
 <?php
-    $success = '';
-    if(isset($_GET['xoatam']) && $_GET['xoatam'] > 0) {
-        $product_id = $_GET['xoatam'];
+$success = '';
+if (isset($_GET['xoatam']) && $_GET['xoatam'] > 0) {
+    $product_id = $_GET['xoatam'];
 
-        $ProductModel->update_product_not_active($product_id);
-        $success = '1 sản phẩm đã thêm vào thùng rác';
-    }
+    $ProductModel->update_product_not_active($product_id);
+    $_SESSION['success_message'] = 'Chuyển sản phẩm vào thùng rác thành công.';
+    header('Location: index.php?quanli=danh-sach-san-pham');
+    exit();
+    $success = '1 sản phẩm đã thêm vào thùng rác';
+}
 
-    if(isset($_GET['khoiphuc'])) {
-        $product_id = $_GET['khoiphuc'];
+if (isset($_GET['khoiphuc'])) {
+    $product_id = $_GET['khoiphuc'];
+    $ProductModel->update_product_active($product_id);
+    $_SESSION['success_message'] = 'Khôi phục sản phẩm thành công.';
+    // $success = '1 sản phẩm đã được khôi phục';
+}
 
-        $ProductModel->update_product_active($product_id);
-        $success = '1 sản phẩm đã được khôi phục';
-    }
+// Xóa vĩnh viễn
+if (isset($_GET['xoa'])) {
+    $product_id = $_GET['xoa'];
+    $ProductModel->delete_product($product_id);
+    $_SESSION['success_message'] = 'Xóa vĩnh viễn sản phẩm thành công.';
+    $success = 'Đã xóa vĩnh viễn 1 sản phẩm';
+}
 
-    // Xóa vĩnh viễn
-    if(isset($_GET['xoa'])) {
-        $product_id = $_GET['xoa'];
-        $ProductModel->delete_product($product_id);
-        $success = 'Đã xóa thành công 1 sản phẩm';
-    }
+$list_products = $ProductModel->select_recycle_products();
 
-    $list_products = $ProductModel->select_recycle_products();
-
-    $html_alert = $BaseModel->alert_error_success('', $success)
-?>
+$html_alert = $BaseModel->alert_error_success('', $success)
+    ?>
 
 <!-- LIST PRODUCTS -->
 <div class="container-fluid pt-4 px-4">
@@ -40,61 +44,63 @@
 
 
 
-    <?php if(count($list_products) >0) {?>
-        <div class="table-responsive">
-            <span class="text-right">
-                <?=$html_alert?>
-            </span>
-            <table class="table text-start align-middle table-bordered table-hover mb-0">
-                <thead>
-                    <tr class="text-dark">
+        <?php if (count($list_products) > 0) { ?>
+            <div class="table-responsive">
+                <span class="text-right">
+                    <?= $html_alert ?>
+                </span>
+                <table class="table text-start align-middle table-bordered table-hover mb-0">
+                    <thead>
+                        <tr class="text-dark">
 
-                        <th scope="col">#</th>
-                        <th scope="col">Tên</th>
-                        <th scope="col">Ảnh</th>
-                        <th scope="col">Giá thường</th>
-                        <th scope="col">Giá khuyến mãi</th>
-                        <th scope="col">Chỉnh sửa</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php 
-                    $i=0;
-                    foreach ($list_products as $value) {
-                        $i++;
-                    ?>
-                    <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Tên</th>
+                            <th scope="col">Ảnh</th>
+                            <th scope="col">Giá thường</th>
+                            <th scope="col">Giá khuyến mãi</th>
+                            <th scope="col">Chỉnh sửa</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $i = 0;
+                        foreach ($list_products as $value) {
+                            $i++;
+                            ?>
+                            <tr>
 
-                        <td><?=$i?></td>
-                        <td><?=$value['name']?></td>
-                        <td>
-                            <img style="max-width: 50px;" src="../upload/<?=$value['image']?>" alt="">
-                        </td>
-                        <td><?=number_format($value['price'])."đ"?></td>
-                        <td><?=number_format($value['sale_price'])."đ"?></td>
-                        <td>
-                            <a class="btn btn-sm btn-secondary" href="index.php?quanli=thung-rac-san-pham&khoiphuc=<?=$value['product_id']?>">
-                                <i class="fa fa-undo"></i> Khôi phục
-                            </a>
-                            <!-- <a class="btn btn-sm btn-danger" onclick="return confirmDeletion();" href="index.php?quanli=thung-rac-san-pham&xoa=<?=$value['product_id']?>">
-                                <i class="fa fa-trash"></i> Xóa vĩnh viễn
-                            </a> -->
+                                <td><?= $i ?></td>
+                                <td><?= $value['name'] ?></td>
+                                <td>
+                                    <img style="max-width: 50px;" src="../upload/<?= $value['image'] ?>" alt="">
+                                </td>
+                                <td><?= number_format($value['price']) . "đ" ?></td>
+                                <td><?= number_format($value['sale_price']) . "đ" ?></td>
+                                <td>
+                                    <a class="btn btn-sm btn-secondary"
+                                        href="index.php?quanli=thung-rac-san-pham&khoiphuc=<?= $value['product_id'] ?>">
+                                        <i class="fa fa-undo"></i> Khôi phục
+                                    </a>
+                                    <a class="btn btn-sm btn-danger" onclick="return confirmDeletion();"
+                                        href="index.php?quanli=thung-rac-san-pham&xoa=<?= $value['product_id'] ?>">
+                                        <i class="fa fa-trash"></i> Xóa vĩnh viễn
+                                    </a>
 
-                        </td>
-                    </tr>
-                    <?php 
-                    }
-                    ?>
+                                </td>
+                            </tr>
+                        <?php
+                        }
+                        ?>
 
 
-                </tbody>
-            </table>
-            
+                    </tbody>
+                </table>
+
+            </div>
         </div>
-    </div>
 
-    <?php }else{?>
+    <?php } else { ?>
         <p class="text-danger">Thùng rác rỗng</p>
-    <?php }?>
+    <?php } ?>
 </div>
 <!-- LIST PRODUCTS END -->

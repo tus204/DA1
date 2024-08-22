@@ -7,10 +7,10 @@
             <div class="col-lg-4 col-md-6 col-sm-7">
                 <div class="footer__about">
                     <div class="footer__logo">
-                        <a href="./index.html"><img src="public/img/fahasa-logo.png" alt=""></a>
+                        <a href="./index.html"><img src="public/img/logo2.png" alt=""></a>
                     </div>
-                    <p>Chào mừng bạn đến với FAHASA nơi cung cấp những loại sách chất lượng</p>
-                    
+                    <p>Chào mừng bạn đến với Poly Bakery nơi cung cấp những loại bánh chất lượng</p>
+
                 </div>
             </div>
             <div class="col-lg-2 col-md-3 col-sm-5">
@@ -52,12 +52,15 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="row">
             <div class="col-lg-12">
                 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                 <div class="footer__copyright__text">
-                    <p>Copyright &copy; <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="#" target="_blank">KHOA NGUYEN</a></p>
+                    <p>Copyright &copy;
+                        <script>document.write(new Date().getFullYear());</script> All rights reserved | This project is
+                        made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="#" target="_blank">N8</a>
+                    </p>
                 </div>
                 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
             </div>
@@ -78,7 +81,7 @@
 <!-- Search End -->
 
 <!-- Toatr -->
-<script>
+<!-- <script>
     $(document).ready(function () {
         $("#toastr-success-top-right").on("click", function () {
             toastr.success("1 sản phẩm đã thêm vào giỏ", "Thành công", {
@@ -100,6 +103,19 @@
             });
         });
     });
+</script> -->
+<script>
+    $(document).ready(function () {
+        <?php if (isset($_SESSION['success_message'])): ?>
+            toastr.success("<?= $_SESSION['success_message'] ?>");
+            <?php unset($_SESSION['success_message']); ?>
+        <?php endif; ?>
+
+        <?php if (isset($_SESSION['error_message'])): ?>
+            toastr.error("<?= $_SESSION['error_message'] ?>");
+            <?php unset($_SESSION['error_message']); ?>
+        <?php endif; ?>
+    });
 </script>
 
 <!-- Js Plugins -->
@@ -116,12 +132,8 @@
 
 <!-- dialogflow -->
 <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
-<df-messenger
-    intent="WELCOME"
-    chat-title="Chat"
-    agent-id="a111a74a-8334-4098-9636-0f1433d6fc97"
-    language-code="vi"
-></df-messenger>
+<df-messenger intent="WELCOME" chat-title="Chatbot hỗ trợ khách hàng" agent-id="1157ce11-d40f-4696-806a-ae5e0dbbc980"
+    language-code="vi"></df-messenger>
 
 
 </body>

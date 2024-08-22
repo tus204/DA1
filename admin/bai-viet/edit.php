@@ -46,8 +46,10 @@
     
             try {
                 $result = $PostModel->update_posts($category_id, $title, $image, $content, $post_id);
-                setcookie('success_update', 'Cập nhật bài viết thành công', time() + 5, '/');
+                // setcookie('success_update', 'Cập nhật bài viết thành công', time() + 5, '/');
+                $_SESSION['success_message'] = 'Cập nhật bài viết thành công.';
                 header("Location: index.php?quanli=cap-nhat-bai-viet&id=".$post_id);
+                exit();
             } catch (Exception $e) {
                 $error_message = $e->getMessage();
                 echo 'Cập nhật bài viết thất bại: ' . $error_message;

@@ -17,7 +17,7 @@
         <div class="sidebar pe-4 pb-3">
             <nav class="navbar bg-light navbar-light">
                 <a href="index.php" class="navbar-brand mx-4 mb-3">
-                    <h3 class="text-primary"><i class="fa fa fa-user me-2"></i>ADMIN</h3>
+                    <img style="max-height: 30px;" class="mx-4" src="../public/img/logo2.png" alt="">
                 </a>
                 <!-- <div class="d-flex align-items-center ms-4 mb-4">
                     <div class="position-relative">
@@ -30,7 +30,7 @@
                     </div>
                 </div> -->
                 <div class="navbar-nav w-100">
-                    <a href="index.php" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
+                    <a href="index.php" class="nav-item nav-link "><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-shopping-basket me-2"></i>Đơn hàng</a>
                         <div class="dropdown-menu bg-transparent border-0">
@@ -42,7 +42,7 @@
                     </div>
                     
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle " data-bs-toggle="dropdown"><i class="fa fa-th me-2"></i>Danh mục</a>
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-th me-2"></i>Danh mục</a>
                         <div class="dropdown-menu bg-transparent border-0">
                             <a href="index.php?quanli=them-danh-muc" class="dropdown-item">Thêm mới</a>
                             <a href="index.php?quanli=danh-sach-danh-muc" class="dropdown-item">Tất cả</a>
@@ -78,6 +78,7 @@
                     
                     <a href="index.php?quanli=danh-sach-khach-hang" class="nav-item nav-link"><i class="fas fa-users me-2"></i>Thành viên</a>
                     <a href="index.php?quanli=binh-luan" class="nav-item nav-link"><i class="fas fa-comment me-2"></i>Bình luận</a>
+                    <a href="index.php?quanli=danh-sach-banner" class="nav-item nav-link"><i class="fas fa-images me-2"></i>Banner</a>
 
                     
                     

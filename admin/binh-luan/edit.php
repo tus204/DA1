@@ -13,7 +13,9 @@
         $status = $_POST["status"];
         $comment_id = $_POST["comment_id"];
         $CommentModel->update_status_comment($status, $comment_id);
+        $_SESSION['success_message'] = 'Cập nhật trạng thái bình luận thành công.';
         header("Location: chi-tiet-binh-luan&id=$comment_id");
+        exit();
     }
 
     if(isset($_GET['xoa']) && $_GET['xoa'] >0) {
@@ -90,7 +92,7 @@
                                 <input type="hidden" name="comment_id" value="<?=$comment_id ?>">
                                 <h6 class="mb-4">
                                     <input type="submit" name="update_status_comment" value="Cập nhật" class="btn btn-custom">
-                                    <a href="chi-tiet-binh-luan&id=<?=$comment_id ?>&xoa=<?=$comment_id ?>" onclick="return confirm('Bạn có chắc chắn muốn xóa bình luận\nSau khi xóa sẽ không thể khôi phục!')" class="btn btn-custom">Xóa bình luận</a>
+                                    <!-- <a href="chi-tiet-binh-luan&id=<?=$comment_id ?>&xoa=<?=$comment_id ?>" onclick="return confirm('Bạn có chắc chắn muốn xóa bình luận\nSau khi xóa sẽ không thể khôi phục!')" class="btn btn-custom">Xóa bình luận</a> -->
                                 </h6>
                             </form>
                         </div>

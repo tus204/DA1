@@ -120,7 +120,7 @@ for ($i = 1; $i <= $numberOfPages; $i++) {
                         <th scope="col">Ảnh</th>
                         <th scope="col">Giá thường</th>
                         <th scope="col">Giá khuyến mãi</th>
-                        <th scope="col">Chỉnh sửa</th>
+                        <th scope="col">Hành động</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -149,7 +149,7 @@ for ($i = 1; $i <= $numberOfPages; $i++) {
                         <td>
                             <div class="dropdown">
                                 <a href="#" data-bs-toggle="dropdown" class="fs-24 text-gray">
-                                    <i class="bi bi-three-dots-vertical text-dark"></i>
+                                    <button class="btn btn-secondary"><i class="bi bi-list-ul"></i></button>
                                 </a>
                                 <div class="dropdown-menu p-0">
                                     <a class="dropdown-item" href="../index.php?url=chitietsanpham&id_sp=<?=$value['product_id']?>&id_dm=<?=$value['category_id']?>" target="_blank">
@@ -157,7 +157,7 @@ for ($i = 1; $i <= $numberOfPages; $i++) {
                                     </a>
                                     <a class="dropdown-item" href="index.php?quanli=cap-nhat-san-pham&id=<?=$value['product_id']?>">Sửa</a>
                                     <a class="dropdown-item text-danger" onclick="return confirmDeletionTemp();" href="index.php?quanli=thung-rac-san-pham&xoatam=<?=$value['product_id']?>">
-                                        Xóa tạm
+                                        Chuyển vào thùng rác
                                     </a>
                                 </div>
                             </div>

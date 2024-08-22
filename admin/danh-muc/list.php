@@ -9,9 +9,10 @@
 
         if($quantity_product <=0) {
             $CategoryModel->delete_category($category_id);
-            
-            setcookie('success_delete', 'Đã xóa thành công 1 danh mục', time() + 5, '/');
+            $_SESSION['success_message'] = 'Đã xóa thành công 1 danh mục.';
+            // setcookie('success_delete', 'Đã xóa thành công 1 danh mục', time() + 5, '/');
             header("Location: index.php?quanli=danh-sach-danh-muc");
+            exit();
         }else {
             $error = 'Không thể xóa danh mục tồn tại sản phẩm';
         }
@@ -48,7 +49,7 @@
                         <th scope="col">Ảnh</th>   
                         <th scope="col">Sản phẩm</th>          
                         <th scope="col">Trạng Thái</th>
-                        <th scope="col">Chỉnh sửa</th>
+                        <th scope="col">Hành động</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -71,9 +72,9 @@
                             $trangThai = 'Tạm ẩn';
                             if($category_status == 1) {
                                 $trangThai = 'Hiển thị';
-                                echo '<span class="btn-small btn-success">'.$trangThai.'</span>';
+                                echo '<span class="btn btn-small btn-success">'.$trangThai.'</span>';
                             }else {
-                                echo '<span class="btn-small btn-danger">'.$trangThai.'</span>';
+                                echo '<span class="btn btn-small btn-danger">'.$trangThai.'</span>';
                             }
                             ?>
                             
@@ -82,11 +83,11 @@
 
                             <div class="dropdown">
                                 <a href="#" data-bs-toggle="dropdown" class="fs-24 text-gray ">
-                                    <i class="bi bi-three-dots-vertical text-dark"></i>
+                                    <button class="btn-sm btn-secondary"><i class="bi bi-three-dots"></i></button>
                                 </a>
                                 <div class="dropdown-menu p-0">
                                     <a class="dropdown-item" href="index.php?quanli=cap-nhat-danh-muc&id=<?=$cate_id?>">Sửa</a>
-                                    <a class="dropdown-item text-danger" href="danh-sach-danh-muc&xoa=<?=$cate_id?>&qty_pd=<?=$qty_product?>">
+                                    <a onclick="return confirm('Có chắc chắn xóa')" class="dropdown-item text-danger" href="danh-sach-danh-muc&xoa=<?=$cate_id?>&qty_pd=<?=$qty_product?>">
                                         Xóa
                                     </a>
                                 </div>

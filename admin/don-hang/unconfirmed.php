@@ -1,6 +1,6 @@
 <?php
-    $list_orders = $OrderModel->select_orders_unconfirmed();
-    
+$list_orders = $OrderModel->select_orders_unconfirmed();
+
 ?>
 <div class="container-fluid pt-4 px-4">
     <div class="bg-light text-center rounded p-4">
@@ -20,7 +20,7 @@
                         <th scope="col">Ngày đặt</th>
                         <th scope="col">Tổng tiền</th>
                         <th scope="col">Trạng Thái</th>
-                        <th scope="col">Chỉnh sửa</th>
+                        <th scope="col">Hành động</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -33,36 +33,40 @@
                         $formatted_date = $BaseModel->date_format($order_date, '');
 
                         //Trang thái đơn hàng
-                        $order_status = '<a href="" class="btn btn-small btn-danger">Chờ xác nhận</a>';
-                        if($status == 2) {
-                            $order_status = '<a href="" class="btn btn-small btn-warning">Đã xác nhận</a>';
-                        }elseif($status == 3) {
-                            $order_status = '<a href="" class="btn btn-small btn-success">Đang giao</a>';
-                        }elseif($status == 4) {
+                        $order_status = '<a href="" class="btn btn-small btn-secondary">Chờ xác nhận</a>';
+                        if ($status == 2) {
+                            $order_status = '<a href="" class="btn btn-small btn-info">Đã xác nhận</a>';
+                        } elseif ($status == 3) {
+                            $order_status = '<a href="" class="btn btn-small btn-warning">Đang giao</a>';
+                        } elseif ($status == 4) {
                             $order_status = '<a href="" class="btn btn-small btn-success">Giao thành công</a>';
+                        } elseif ($status == 5) {
+                            $order_status = '<a href="" class="btn btn-small btn-danger">Đã hủy</a>';
                         }
-                    ?>
-                    <tr>
-                        <td><?=$i?></td>
-                        <td class="td-name">
-                            <?=$full_name?>
-                        </td>
-                        <td class="td-date">
-                            <?=$formatted_date?>
-                        </td>
-                        <td class="text-dark" style="font-weight: 600;">
-                            <?=number_format($total)?>₫
-                        </td>
-                        <td class="td-responsive-2"> 
-                            <?=$order_status?>
-                        </td>
-                        <td class="td-responsive-2">
-                        
-                            <a class="btn-sm btn-success" href="index.php?quanli=cap-nhat-don-hang&id=<?=$order_id?>">Xem</a>
-                            <a class="btn-sm btn-secondary" href="index.php?quanli=cap-nhat-don-hang&id=<?=$order_id?>">Sửa</a>                          
-                        </td>
-                    </tr>
-                    <?php
+                        ?>
+                        <tr>
+                            <td><?= $i ?></td>
+                            <td class="td-name">
+                                <?= $full_name ?>
+                            </td>
+                            <td class="td-date">
+                                <?= $formatted_date ?>
+                            </td>
+                            <td class="text-dark" style="font-weight: 600;">
+                                <?= number_format($total) ?>₫
+                            </td>
+                            <td class="td-responsive-2">
+                                <?= $order_status ?>
+                            </td>
+                            <td class="td-responsive-2">
+
+                                <a class="btn-sm btn-success"
+                                    href="index.php?quanli=cap-nhat-don-hang&id=<?= $order_id ?>">Xem</a>
+                                <!-- <a class="btn-sm btn-secondary"
+                                    href="index.php?quanli=cap-nhat-don-hang&id=<?= $order_id ?>">Sửa</a> -->
+                            </td>
+                        </tr>
+                        <?php
                     }
                     ?>
 

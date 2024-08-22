@@ -60,34 +60,38 @@ foreach ($statistics_orders as $value) {
 }
 
 ?>
+<div class="container-fluid pt-4 px-4">
+    <div class="bg-light rounded p-4">
+        <div class="">
+            <h5>Top sản phẩm bán chạy</h5>
+            <div class="dropdown">
+                <a class="btn btn-custom dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                    Top bán chạy
+                </a>
 
-<div class="mt-5">
-    <h5>Top sản phẩm bán chạy</h5>
-    <div class="dropdown">
-        <a class="btn btn-custom dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-            Top bán chạy
-        </a>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <li>
+                        <a href="top-luot-ban&top=100" class="dropdown-item">Xem tất cả</a>
+                    </li>
+                    <li>
+                        <a href="top-luot-ban&top=5" class="dropdown-item">Top 5</a>
+                    </li>
+                    <li>
+                        <a href="top-luot-ban&top=10" class="dropdown-item">Top 10</a>
+                    </li>
+                    <li>
+                        <a href="top-luot-ban&top=15" class="dropdown-item">Top 15</a>
+                    </li>
+                    <li>
+                        <a href="top-luot-ban&top=30" class="dropdown-item">Top 30</a>
+                    </li>
+                </ul>
+            </div>
 
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-            <li> 
-                <a href="top-luot-ban&top=100" class="dropdown-item">Xem tất cả</a>
-            </li>
-            <li> 
-                <a href="top-luot-ban&top=5" class="dropdown-item">Top 5</a>
-            </li>
-            <li> 
-                <a href="top-luot-ban&top=10" class="dropdown-item">Top 10</a>
-            </li>
-            <li> 
-                <a href="top-luot-ban&top=15" class="dropdown-item">Top 15</a>
-            </li>
-            <li> 
-                <a href="top-luot-ban&top=30" class="dropdown-item">Top 30</a>
-            </li>
-        </ul>
+            <canvas id="myChart"></canvas>
+        </div>
     </div>
-
-    <canvas id="myChart"></canvas>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

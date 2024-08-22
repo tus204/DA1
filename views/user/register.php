@@ -1,113 +1,149 @@
 <?php
 
-    $error = array(
-        'email' => '',
-        'fullname' => '',
-        'username' => '',
-        'password' => '',
-        'password_confirm' => '',
-        'phone' => '',
-        'address' => '',     
-    );
-    
-    $email_tmp = "";
-    $fullname_tmp = "";
-    $username_tmp = "";
-    $password_tmp = "";
-    $phone_tmp = "";
-    $address_tmp = "";
-    $password_cf_tmp = "";
+$error = array(
+    'email' => '',
+    'fullname' => '',
+    'username' => '',
+    'password' => '',
+    'password_confirm' => '',
+    'phone' => '',
+    'address' => '',
+);
 
-    $list_users = $CustomerModel->select_users();
-    
-    // Kiểm tra nếu form được submit
-    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["register"])) {
-        
-        // Lấy dữ liệu từ form
-        $email = trim($_POST["email_register"]);
-        $full_name = trim($_POST["full_name"]);
-        $username = trim($_POST["username"]);
-        $password = trim($_POST["password"]);
-        $password_confirm = trim($_POST["password_confirm"]);
-        $phone = trim($_POST["phone"]);
-        $address = trim($_POST["address"]);
-        $image = "user-default.png";
+$email_tmp = "";
+$fullname_tmp = "";
+$username_tmp = "";
+$password_tmp = "";
+$phone_tmp = "";
+$address_tmp = "";
+$password_cf_tmp = "";
 
-        //MÃ hóa password
-        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+$list_users = $CustomerModel->select_users();
 
+// Kiểm tra nếu form được submit
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["register"])) {
+
+    // Lấy dữ liệu từ form
+    $email = trim($_POST["email_register"]);
+    $full_name = trim($_POST["full_name"]);
+    $username = trim($_POST["username"]);
+    $password = trim($_POST["password"]);
+    $password_confirm = trim($_POST["password_confirm"]);
+    $phone = trim($_POST["phone"]);
+    $address = trim($_POST["address"]);
+    $image = "user-default.png";
+
+    // required
+    if (empty($email)) {
+        $error['email'] = 'Email không được bỏ trống.';
+    }
+    if (empty($full_name)) {
+        $error['fullname'] = 'Họ tên không được bỏ trống.';
+    }
+    if (empty($username)) {
+        $error['username'] = 'Tên đăng nhập không được bỏ trống.';
+    }
+    if (empty($password)) {
+        $error['password'] = 'Mật khẩu không được bỏ trống.';
+    }
+    if (empty($password_confirm)) {
+        $error['password_confirm'] = 'Xác nhận mật khẩu không được bỏ trống.';
+    }
+    if (empty($phone)) {
+        $error['phone'] = 'Số điện thoại không được bỏ trống.';
+    }
+
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $error['email'] = 'Email không hợp lệ.';
+    } else {
+        // check email đã tồn tại trong cơ sở dữ liệu
         foreach ($list_users as $user) {
             if ($user['email'] == $email) {
                 $error['email'] = 'Email đã được đăng ký.';
-                break; 
+                break;
             }
         }
 
-        if((strlen($email) > 255)) {
-            $error['email'] = 'Email không được quá 255 ký tự';
+        // check email có tồn tại bằng VerifyEmail
+        $emailVerifier = new VerifyEmail();
+        if (!$emailVerifier->check($email)) {
+            $error['email'] = 'Email không tồn tại.';
         }
-
-        if((strlen($full_name) > 255)) {
-            $error['fullname'] = 'Họ tên không được quá 255 ký tự';
-        }
-
-        foreach ($list_users as $user) {
-            if ($user['username'] == $username) {
-                $error['username'] = 'Tên đăng nhập đã tồn tại.';
-                break; 
-            }
-        }
-
-        foreach ($list_users as $user) {
-            if ($user['phone'] == $phone) {
-                $error['phone'] = 'Số điện thoại đã được đăng ký.';
-                break; 
-            }
-        }
-
-        if($password != $password_confirm) {
-            $error['password_confirm'] = 'Nhập lại mật khẩu không trùng khớp';
-        }
-
-        if (strlen($password) < 8) {
-            $error['password'] = 'Mật khẩu phải chứa ít nhất 8 ký tự.';
-        }
-
-        if (!preg_match('/^(03|05|07|08|09)\d{8}$/', $phone)) {
-            $error['phone'] = 'Số điện thoại không đúng định dạng.';
-        }
-
-        if((strlen($address) > 255)) {
-            $error['address'] = 'Địa chỉ không được quá 255 ký tự';
-        }
-
-        if(empty(array_filter($error))) {
-            // Insert dữ liệu user
-            $CustomerModel->user_insert($username, $hashed_password, $full_name, $image, $email, $phone, $address);
-            $_SESSION['user_register'] = [
-                'username' => $username,
-                'password' => $password
-            ];
-
-            header("Location: index.php?url=dang-nhap");
-            exit();
-        }else {
-            $email_tmp = $email;
-            $fullname_tmp = $full_name;
-            $username_tmp = $username;
-            $password_tmp = $password;
-            $password_cf_tmp = $password;
-            $phone_tmp = $phone;
-            $address_tmp = $address;
-            $password_cf_tmp = $password_confirm;
-        }
-
-        
     }
-    
+
+    if ((strlen($email) > 255)) {
+        $error['email'] = 'Email không được quá 255 ký tự';
+    }
+
+    // $emailVerifier = new VerifyEmail();
+    // if ($emailVerifier->check($email)) {
+    //     return false;
+    // } else {
+    //     return $error['email'] = 'Email không tồn tại !!!';
+    // }
+
+    if ((strlen($full_name) > 255)) {
+        $error['fullname'] = 'Họ tên không được quá 255 ký tự';
+    }
+
+    foreach ($list_users as $user) {
+        if ($user['username'] == $username) {
+            $error['username'] = 'Tên đăng nhập đã tồn tại.';
+            break;
+        }
+    }
+
+    foreach ($list_users as $user) {
+        if ($user['phone'] == $phone) {
+            $error['phone'] = 'Số điện thoại đã được đăng ký.';
+            break;
+        }
+    }
+
+    if ($password != $password_confirm) {
+        $error['password_confirm'] = 'Nhập lại mật khẩu không trùng khớp';
+    }
+
+    if (strlen($password) < 8) {
+        $error['password'] = 'Mật khẩu phải chứa ít nhất 8 ký tự.';
+    }
+
+    if (!preg_match('/^(03|05|07|08|09)\d{8}$/', $phone)) {
+        $error['phone'] = 'Số điện thoại không đúng định dạng.';
+    }
+
+    if ((strlen($address) > 255)) {
+        $error['address'] = 'Địa chỉ không được quá 255 ký tự';
+    }
+
+    if (empty(array_filter($error))) {
+        //MÃ hóa password
+        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+        // Insert dữ liệu user
+        $CustomerModel->user_insert($username, $hashed_password, $full_name, $image, $email, $phone, $address);
+        $_SESSION['user_register'] = [
+            'username' => $username,
+            'password' => $password
+        ];
+
+        header("Location: index.php?url=dang-nhap");
+        exit();
+    } else {
+        $email_tmp = $email;
+        $fullname_tmp = $full_name;
+        $username_tmp = $username;
+        $password_tmp = $password;
+        $password_cf_tmp = $password;
+        $phone_tmp = $phone;
+        $address_tmp = $address;
+        $password_cf_tmp = $password_confirm;
+    }
+
+
+}
+
 ?>
 <style>
-
     label {
         margin-top: 5px;
     }
@@ -116,20 +152,21 @@
 <div class="container my-5">
     <div class="row d-flex justify-content-center align-items-center m-0">
         <div class="login_oueter">
-            
-            <form action="" method="post" id="login" autocomplete="off" class="p-3">
+
+            <form action="" method="post" id="login" autocomplete="off" class="p-3" novalidate>
                 <h4 class="my-3 text-center">ĐĂNG KÝ TÀI KHOẢN</h4>
                 <div class="form-row">
-                    
+
                     <div class="col-12">
-                        
+
                         <div class="input-group mb-0">
                             <label class="w-100 text-dark" for="email_res">Địa chỉ Email</label>
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon1"><i class="fas fa-envelope"></i></span>
                             </div>
-                            <input name="email_register" type="email" value="<?=$email_tmp?>" class="input form-control" id="email_res" required="true"  placeholder="Email" />
-                            <span class="w-100 text-danger"><?=$error['email']?></span>
+                            <input name="email_register" type="text" value="<?= $email_tmp ?>"
+                                class="input form-control" id="email_res" required="true" placeholder="Email" />
+                            <span class="w-100 text-danger"><?= $error['email'] ?></span>
                         </div>
                     </div>
                     <div class="col-12">
@@ -138,8 +175,9 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon1"><i class="fas fa-user"></i></span>
                             </div>
-                            <input name="full_name" type="text" value="<?=$fullname_tmp?>" class="input form-control" id="full_name" required="true"  placeholder="Họ và tên" />
-                            <span class="w-100 text-danger"><?=$error['fullname']?></span>
+                            <input name="full_name" type="text" value="<?= $fullname_tmp ?>" class="input form-control"
+                                id="full_name" required="true" placeholder="Họ và tên" />
+                            <span class="w-100 text-danger"><?= $error['fullname'] ?></span>
                         </div>
                     </div>
                     <div class="col-12">
@@ -148,8 +186,9 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon1"><i class="fas fa-user"></i></span>
                             </div>
-                            <input name="username" type="text" value="<?=$username_tmp?>" class="input form-control" id="username" required="true"  placeholder="Tên đăng nhập" />
-                            <span class="w-100 text-danger"><?=$error['username']?></span>
+                            <input name="username" type="text" value="<?= $username_tmp ?>" class="input form-control"
+                                id="username" required="true" placeholder="Tên đăng nhập" />
+                            <span class="w-100 text-danger"><?= $error['username'] ?></span>
                         </div>
                     </div>
                     <div class="col-12">
@@ -158,23 +197,27 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon1"><i class="fas fa-lock"></i></span>
                             </div>
-                            <input name="password" type="password" value="<?=$password_tmp?>" class="input form-control" id="password_register" placeholder="Mật khẩu" required="true" aria-label="password" aria-describedby="basic-addon1" />
-                            
+                            <input name="password" type="password" value="<?= $password_tmp ?>"
+                                class="input form-control" id="password_register" placeholder="Mật khẩu" required="true"
+                                aria-label="password" aria-describedby="basic-addon1" />
+
                             <div class="input-group-append">
                                 <span class="input-group-text" onclick="password_show_hide_register();">
                                     <i class="fas fa-eye" id="show_eye_register"></i>
                                     <i class="fas fa-eye-slash d-none" id="hide_eye_register"></i>
                                 </span>
                             </div>
-                            <span class="w-100 text-danger"><?=$error['password']?></span>
+                            <span class="w-100 text-danger"><?= $error['password'] ?></span>
                         </div>
                         <div class="input-group my-0">
                             <label class="w-100 text-dark" for="password_confirm">Nhập lại mật khẩu</label>
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon1"><i class="fas fa-check"></i></span>
                             </div>
-                            <input name="password_confirm" type="password" value="<?=$password_cf_tmp?>" class="input form-control" id="password_confirm" placeholder="Xác nhận mật khẩu" required />
-                            <span class="w-100 text-danger"><?=$error['password_confirm']?></span>
+                            <input name="password_confirm" type="password" value="<?= $password_cf_tmp ?>"
+                                class="input form-control" id="password_confirm" placeholder="Xác nhận mật khẩu"
+                                required />
+                            <span class="w-100 text-danger"><?= $error['password_confirm'] ?></span>
                         </div>
                     </div>
                     <div class="col-12">
@@ -183,18 +226,21 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon1"><i class="fas fa-phone"></i></span>
                             </div>
-                            <input name="phone" type="text" value="<?=$phone_tmp?>" class="input form-control" id="phone" placeholder="Số điện thoại" required />
-                            <span class="w-100 text-danger"><?=$error['phone']?></span>
+                            <input name="phone" type="text" value="<?= $phone_tmp ?>" class="input form-control"
+                                id="phone" placeholder="Số điện thoại" required />
+                            <span class="w-100 text-danger"><?= $error['phone'] ?></span>
                         </div>
                     </div>
                     <div class="col-12">
                         <div class="input-group mt-0 mb-3">
                             <label class="w-100 text-dark" for="phone">Địa chỉ</label>
                             <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon1"><i class="fas fa-map-marker"></i></span>
+                                <span class="input-group-text" id="basic-addon1"><i
+                                        class="fas fa-map-marker"></i></span>
                             </div>
-                            <input name="address" type="text" value="<?=$address_tmp?>" class="input form-control" id="address" placeholder="Địa chỉ" required/>
-                            <span class="w-100 text-danger"><?=$error['address']?></span>
+                            <input name="address" type="text" value="<?= $address_tmp ?>" class="input form-control"
+                                id="address" placeholder="Địa chỉ" required />
+                            <span class="w-100 text-danger"><?= $error['address'] ?></span>
                         </div>
                     </div>
 
@@ -202,7 +248,7 @@
                         <button class="btn btn-primary w-100" type="submit" name="register">Đăng ký</button>
                     </div>
                     <div class="col-sm-12 pt-3 text-center">
-                        <a href="#">Quên mật khẩu</a>
+                        <a href="quen-mat-khau">Quên mật khẩu</a>
                     </div>
 
                 </div>
@@ -212,7 +258,7 @@
                 </div>
             </form>
         </div>
-    </div>  
+    </div>
 </div>
 
 <script>

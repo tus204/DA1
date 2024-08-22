@@ -1,5 +1,5 @@
  /* @import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap'); */
-:root {
+ :root {
     /* --primary: #009CFF; */
     --primary:  #007dcc;
    
@@ -330,8 +330,22 @@
     position: relative
 }
 
+.track .step2 {
+    -webkit-box-flex: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    width: 25%;
+    margin-top: -18px;
+    text-align: center;
+    position: relative
+}
+
 .track .step.active:before {
     background: #009CFF;
+}
+
+.track .step2.active:before {
+    background: #eb0606;
 }
 
 .track .step::before {
@@ -342,9 +356,21 @@
     left: 0;
     top: 18px
 }
+.track .step2::before {
+    height: 7px;
+    position: absolute;
+    content: "";
+    width: 100%;
+    left: 0;
+    top: 18px
+}
 
 .track .step.active .icon {
     background: #009CFF;
+    color: #fff;
+}
+.track .step2.active .icon {
+    background: #eb0606;
     color: #fff;
 }
 
@@ -359,6 +385,10 @@
 }
 
 .track .step.active .text {
+    font-weight: 400;
+    color: #000;
+}
+.track .step2.active .text {
     font-weight: 400;
     color: #000;
 }

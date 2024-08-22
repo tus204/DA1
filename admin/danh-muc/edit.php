@@ -44,8 +44,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["update_category"])) {
 
         try {
             $result = $CategoryModel->update_category($name, $image, $status, $category_id);
-            setcookie('success_update', 'Cập nhật danh mục thành công', time() + 5, '/');
+            // setcookie('success_update', 'Cập nhật danh mục thành công', time() + 5, '/');
+            $_SESSION['success_message'] = 'Cập nhật danh mục thành công.';
             header("Location: index.php?quanli=cap-nhat-danh-muc&id=".$category_id);
+            exit();
 
         } catch (Exception $e) {
             $error_message = $e->getMessage();

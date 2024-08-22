@@ -18,7 +18,7 @@
                         <th scope="col">Họ tên</th> 
                         <th scope="col">Bình luận</th>       
                         <th scope="col">Thời gian</th>  
-                        <th scope="col">Chỉnh sửa</th>
+                        <th scope="col">Hành động</th>
                     </tr>
                 </thead>
                 <tbody>

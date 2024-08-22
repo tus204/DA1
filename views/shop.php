@@ -55,7 +55,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="sidebar__filter">
+                        <!-- <div class="sidebar__filter">
                             <div class="section-title">
                                 <h4>TÌM THEO GIÁ</h4>
                             </div>
@@ -69,16 +69,14 @@
                                             <p>Giá từ:</p> <br>
                                             <input type="text" id="minamount" > <p>đến</p>
                                             <input type="text" id="maxamount" > <br>
-
-                                            <!-- Sử Dụng Thẻ a hoặc input de loc gia -->
                                             <input type="submit" class="filter-price" name="" value="LỌC GIÁ">
                                         </div>
                                     </form>
         
                                 </div>
                             </div>
-                            <!-- <a href="#">LỌC GIÁ</a> -->
-                        </div>
+                            <a href="#">LỌC GIÁ</a>
+                        </div> -->
                         
                         
                     </div>

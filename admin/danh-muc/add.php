@@ -50,7 +50,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["add_category"])) {
 
         try {
             $result = $CategoryModel->insert_categories($name, $image, $status);
-            $success = 'Thêm danh mục thành công';
+            // $success = 'Thêm danh mục thành công';
+            $_SESSION['success_message'] = 'Thêm danh mục thành công.';
+            header("Location: index.php?quanli=danh-sach-danh-muc");
+            exit();
         } catch (Exception $e) {
             $error_message = $e->getMessage();
             echo 'Thêm danh mục thất bại: ' . $error_message;
