@@ -1,0 +1,3 @@
+Set up project step by step ^^
+Import db: "da1.sql", db name may be "da1"
+run apache ...
